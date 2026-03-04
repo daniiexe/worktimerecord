@@ -8,6 +8,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class WorkTimeRecord extends Application {
+    public static void main(String[] args) {
+        Application.launch(WorkTimeRecord.class, args);
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(WorkTimeRecord.class.getResource("worktimerecord.fxml"));

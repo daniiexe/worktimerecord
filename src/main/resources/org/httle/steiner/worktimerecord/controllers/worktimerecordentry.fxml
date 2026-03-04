@@ -65,6 +65,10 @@
 
         <HBox alignment="CENTER_RIGHT" spacing="10.0">
             <children>
+                <Button fx:id="btnClear" style="-fx-background-color: #fcb201; -fx-text-fill: white;" text="Clear">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor></Button>
                 <Button fx:id="btnCancel" style="-fx-background-color: #e74c3c; -fx-text-fill: white;" text="Abbrechen">
                <cursor>
                   <Cursor fx:constant="HAND" />
