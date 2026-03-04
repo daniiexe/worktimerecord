@@ -7,6 +7,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 public class WorkTimeRecordEntryController {
     @FXML private Button btnCreate;
     @FXML private Button btnCancel;
@@ -71,6 +76,17 @@ public class WorkTimeRecordEntryController {
         pause = Double.parseDouble(txtPause.getText());
         assignment = txtAssignment.getText();
         notes = txtNotes.getText();
+
+        try (PrintWriter writer =
+                     new PrintWriter(new FileWriter("csv/entries.csv", true))) {
+
+            writer.println(mid + ";" + firstName + ";" + lastName + ";" +
+                    project + ";" + date + ";" + start + ";" +
+                    end + ";" + pause + ";" + assignment + ";" + notes);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         setWorkedHours();
     }
