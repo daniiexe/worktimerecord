@@ -6,11 +6,10 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.httle.steiner.worktimerecord.constants.Constants;
+import org.httle.steiner.worktimerecord.model.WorktimeModel;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 
 public class WorkTimeRecordEntryController {
     @FXML private Button btnCreate;
@@ -32,13 +31,15 @@ public class WorkTimeRecordEntryController {
     private String lastName;
     private String project;
     private String date;
-    private static double start;
-    private static double end;
-    private static double pause;
+    private double start;
+    private double end;
+    private double pause;
     private String assignment;
     private String notes;
 
-    private static double workedHours;
+    private WorktimeModel worktimeModel;
+
+    public void setWorktimeModel(WorktimeModel worktimeModel) {this.worktimeModel = worktimeModel;}
 
     @FXML
     public void initialize() {
@@ -66,31 +67,42 @@ public class WorkTimeRecordEntryController {
     }
 
     private void createEntry() {
-        mid = txtMID.getText();
-        firstName = txtFirstname.getText();
-        lastName = txtLastname.getText();
-        project = txtProject.getText();
-        date = txtDate.getValue().toString();
-        start = Double.parseDouble(txtStart.getText());
-        end = Double.parseDouble(txtEnd.getText());
-        pause = Double.parseDouble(txtPause.getText());
-        assignment = txtAssignment.getText();
-        notes = txtNotes.getText();
+        try {
 
-        try (PrintWriter writer =
-                     new PrintWriter(new FileWriter("csv/entries.csv", true))) {
+            if (worktimeModel == null) {System.err.println("WorktimeModel is null!"); return;}
 
-            writer.println(mid + ";" + firstName + ";" + lastName + ";" +
-                    project + ";" + date + ";" + start + ";" +
-                    end + ";" + pause + ";" + assignment + ";" + notes);
+            mid = txtMID.getText();
+            firstName = txtFirstname.getText();
+            lastName = txtLastname.getText();
+            project = txtProject.getText();
+            date = txtDate.getValue().toString();
+            start = Double.parseDouble(txtStart.getText());
+            end = Double.parseDouble(txtEnd.getText());
+            pause = Double.parseDouble(txtPause.getText());
+            assignment = txtAssignment.getText();
+            notes = txtNotes.getText();
 
-        } catch (IOException e) {
+            double workedHours = (end - start) - pause;
+            if(workedHours < 0) workedHours = 0;
+
+            worktimeModel.addHours(workedHours);
+
+            try (PrintWriter writer =
+                         new PrintWriter(new FileWriter("csv/entries.csv", true))) {
+
+                writer.println(mid + ";" + firstName + ";" + lastName + ";" +
+                        project + ";" + date + ";" + start + ";" +
+                        end + ";" + pause + ";" + assignment + ";" + notes);
+
+                clearInput();
+                closeInputWindow();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        setWorkedHours();
     }
-
-    public static void setWorkedHours() {workedHours  = (end - start) - pause;}
-    public static double getWorkedHours() {return workedHours;}
 }

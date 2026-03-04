@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="TOP_CENTER" prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.httle.steiner.worktimerecord.controllers.WorkTimeRecordController">
+    <children>
+        <MenuBar VBox.vgrow="NEVER">
+            <menus>
+                <Menu text="Datei"><items><MenuItem text="Beenden" /></items></Menu>
+                <Menu text="Bearbeiten"><items><MenuItem text="Rückgängig" /></items></Menu>
+                <Menu text="Hilfe"><items><MenuItem text="Über" /></items></Menu>
+            </menus>
+        </MenuBar>
+
+        <AnchorPane VBox.vgrow="ALWAYS">
+            <children>
+                <HBox fx:id="statHeader" alignment="CENTER" prefHeight="90.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
+                    <children>
+                        <Label fx:id="lbHoursSummary" alignment="CENTER" prefHeight="60.0" prefWidth="400.0" style="-fx-border-color: #bdc3c7; -fx-border-radius: 8; -fx-background-color: #f8f9fa;" text="Gesamt: NULL">
+                            <font><Font name="System Bold" size="14.0" /></font>
+                            <HBox.margin><Insets left="15.0" right="15.0" /></HBox.margin>
+                        </Label>
+                        <Label fx:id="lbHoursWorked" alignment="CENTER" prefHeight="60.0" prefWidth="400.0" style="-fx-border-color: #bdc3c7; -fx-border-radius: 8; -fx-background-color: #f8f9fa;" text="Arbeitsstunden: NULL">
+                            <font><Font name="System Bold" size="14.0" /></font>
+                            <HBox.margin><Insets left="15.0" right="15.0" /></HBox.margin>
+                        </Label>
+                        <Label fx:id="lbHoursRest" alignment="CENTER" prefHeight="60.0" prefWidth="400.0" style="-fx-border-color: #bdc3c7; -fx-border-radius: 8; -fx-background-color: #f8f9fa;" text="Verbleibend: NULL">
+                            <font><Font name="System Bold" size="14.0" /></font>
+                            <HBox.margin><Insets left="15.0" right="15.0" /></HBox.margin>
+                        </Label>
+                    </children>
+                </HBox>
+
+                <VBox spacing="10.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="155.0" AnchorPane.rightAnchor="155.0" AnchorPane.topAnchor="110.0">
+                    <children>
+                        <Button fx:id="btnEntry" defaultButton="true" maxWidth="Infinity" minHeight="50.0" mnemonicParsing="false" prefHeight="50.0" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;" text="ARBEITSZEIT EINTRAGEN" VBox.vgrow="NEVER">
+                            <font><Font size="14.0" /></font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                        </Button>
+
+                        <Label text="Letzte Einträge:">
+                            <font><Font name="System Bold" size="13.0" /></font>
+                        </Label>
+
+                        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-border-color: #dcdde1;" VBox.vgrow="ALWAYS">
+                            <content>
+                                <VBox fx:id="csvListContainer" spacing="5.0" style="-fx-padding: 10; -fx-background-color: white;">
+                                    <children>
+                                        <Label maxWidth="Infinity" style="-fx-background-color: #ecf0f1; -fx-padding: 8; -fx-background-radius: 3;" text="MID: 1, Habaz Klaus, 02.03.2026, 5:00 Uhr - 16:00 Uhr, Aufagaben: Sieg, NOtizen: Heil" />
+                                    </children>
+                                </VBox>
+                            </content>
+                        </ScrollPane>
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+    </children>
+</VBox>
