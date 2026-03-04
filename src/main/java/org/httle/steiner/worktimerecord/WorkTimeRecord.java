@@ -20,5 +20,4 @@ public class WorkTimeRecord extends Application {
         stage.setMaximized(true);
         stage.setTitle("WorkTimeRecord");
         stage.show();
-    }   
-}
+    }   }

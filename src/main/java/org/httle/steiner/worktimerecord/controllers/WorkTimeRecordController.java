@@ -12,14 +12,10 @@ import org.httle.steiner.worktimerecord.constants.Constants;
 import java.io.IOException;
 
 public class WorkTimeRecordController {
-    @FXML
-    private Button btnEntry;
-    @FXML
-    private Label lbHoursSummary;
-    @FXML
-    private Label lbHoursWorked;
-    @FXML
-    private Label lbHoursRest;
+    @FXML private Button btnEntry;
+    @FXML private Label lbHoursSummary;
+    @FXML private Label lbHoursWorked;
+    @FXML private Label lbHoursRest;
 
     @FXML
     public void initialize() {

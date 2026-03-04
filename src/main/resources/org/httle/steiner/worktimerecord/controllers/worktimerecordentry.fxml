@@ -19,19 +19,19 @@
             </columnConstraints>
             <children>
                 <Label text="Mitarbeiter ID:" GridPane.rowIndex="0" />
-                <TextField fx:id="txtId" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <TextField fx:id="txtMID" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
                 <Label text="Vorname:" GridPane.rowIndex="1" />
-                <TextField fx:id="txtVorname" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="txtFirstname" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
                 <Label text="Nachname:" GridPane.rowIndex="2" />
-                <TextField fx:id="txtNachname" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="txtLastname" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
                 <Label text="Projekt:" GridPane.rowIndex="3" />
-                <TextField fx:id="txtProjekt" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <TextField fx:id="txtProject" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
                 <Label text="Datum:" GridPane.rowIndex="4" />
-                <DatePicker fx:id="dpDatum" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                <DatePicker fx:id="txtDate" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></DatePicker>
@@ -46,10 +46,10 @@
                 <TextField fx:id="txtPause" promptText="mm" GridPane.columnIndex="1" GridPane.rowIndex="7" />
 
                 <Label text="Aufgaben:" GridPane.rowIndex="8" />
-                <TextArea fx:id="txtAufgaben" prefHeight="60.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                <TextArea fx:id="txtAssignment" prefHeight="60.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
 
                 <Label text="Notizen:" GridPane.rowIndex="9" />
-                <TextArea fx:id="txtNotizen" prefHeight="60.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                <TextArea fx:id="txtNotes" prefHeight="60.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
             </children>
          <rowConstraints>
             <RowConstraints />
@@ -73,7 +73,7 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
-                <Button prefWidth="100.0" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;" text="Speichern">
+                <Button fx:id="btnCreate" prefWidth="100.0" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;" text="Speichern">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
