@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.httle.steiner.worktimerecord.constants.Constants;
+import org.httle.steiner.worktimerecord.model.Logger;
 import org.httle.steiner.worktimerecord.model.WorktimeModel;
 
 import java.io.IOException;
@@ -20,6 +21,7 @@ public class WorkTimeRecordController {
     @FXML private Label lbHoursRest;
 
     private WorktimeModel worktimeModel;
+    private final Logger logger = Logger.getInstance();
 
     @FXML
     public void initialize() {
@@ -51,8 +53,9 @@ public class WorkTimeRecordController {
             stage.initOwner(btnEntry.getScene().getWindow());
             stage.setScene(scene);
             stage.show();
+
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(e.getMessage());
         }
     }
 }

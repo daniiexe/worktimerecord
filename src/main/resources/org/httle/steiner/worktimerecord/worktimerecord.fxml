@@ -8,6 +8,7 @@
 
 <VBox alignment="TOP_CENTER" prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.httle.steiner.worktimerecord.controllers.WorkTimeRecordController">
     <children>
+        <!--
         <MenuBar VBox.vgrow="NEVER">
             <menus>
                 <Menu text="Datei"><items><MenuItem text="Beenden" /></items></Menu>
@@ -15,6 +16,7 @@
                 <Menu text="Hilfe"><items><MenuItem text="Über" /></items></Menu>
             </menus>
         </MenuBar>
+        -->
 
         <AnchorPane VBox.vgrow="ALWAYS">
             <children>

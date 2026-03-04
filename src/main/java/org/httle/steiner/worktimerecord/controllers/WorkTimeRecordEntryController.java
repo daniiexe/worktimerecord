@@ -7,6 +7,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.httle.steiner.worktimerecord.constants.Constants;
+import org.httle.steiner.worktimerecord.model.Logger;
 import org.httle.steiner.worktimerecord.model.WorktimeModel;
 
 import java.io.*;
@@ -38,6 +39,7 @@ public class WorkTimeRecordEntryController {
     private String notes;
 
     private WorktimeModel worktimeModel;
+    private final Logger logger = Logger.getInstance();
 
     public void setWorktimeModel(WorktimeModel worktimeModel) {this.worktimeModel = worktimeModel;}
 
@@ -68,7 +70,6 @@ public class WorkTimeRecordEntryController {
 
     private void createEntry() {
         try {
-
             if (worktimeModel == null) {System.err.println("WorktimeModel is null!"); return;}
 
             mid = txtMID.getText();
@@ -83,26 +84,23 @@ public class WorkTimeRecordEntryController {
             notes = txtNotes.getText();
 
             double workedHours = (end - start) - pause;
-            if(workedHours < 0) workedHours = 0;
+            if (workedHours < 0) workedHours = 0;
 
             worktimeModel.addHours(workedHours);
 
-            try (PrintWriter writer =
-                         new PrintWriter(new FileWriter("csv/entries.csv", true))) {
+            try (PrintWriter writer = new PrintWriter(new FileWriter("csv/entries.csv", true))) {
 
-                writer.println(mid + ";" + firstName + ";" + lastName + ";" +
-                        project + ";" + date + ";" + start + ";" +
-                        end + ";" + pause + ";" + assignment + ";" + notes);
+                writer.println(mid + ";" + firstName + ";" + lastName + ";" + project + ";" + date + ";" + start + ";" + end + ";" + pause + ";" + assignment + ";" + notes);
 
                 clearInput();
                 closeInputWindow();
+
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.log(e.getMessage());
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.log(e.getMessage());
         }
-
     }
 }
