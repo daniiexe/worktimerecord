@@ -5,6 +5,8 @@ import javafx.beans.property.SimpleDoubleProperty;
 
 import java.io.*;
 
+
+// TODO: Translate decimal numbers to hour unit numbers
 public class WorktimeModel {
     private final Logger logger = Logger.getInstance();
     private final DoubleProperty workedHours = new SimpleDoubleProperty(0);
