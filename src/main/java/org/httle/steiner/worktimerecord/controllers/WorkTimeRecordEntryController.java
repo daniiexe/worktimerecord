@@ -25,6 +25,7 @@ public class WorkTimeRecordEntryController {
     @FXML private Button btnCreate;
     @FXML private Button btnCancel;
     @FXML private Button btnClear;
+
     @FXML private TextField txtMID;
     @FXML private TextField txtFirstname;
     @FXML private TextField txtLastname;
@@ -36,8 +37,8 @@ public class WorkTimeRecordEntryController {
     @FXML private TextArea txtAssignment;
     @FXML private TextArea txtNotes;
 
-    private WorktimeModel worktimeModel;
     private final Logger logger = Logger.getInstance();
+    private WorktimeModel worktimeModel;
 
     public void setWorktimeModel(WorktimeModel worktimeModel) {this.worktimeModel = worktimeModel;}
 
@@ -75,7 +76,6 @@ public class WorkTimeRecordEntryController {
             String lastName = txtLastname.getText();
             String project = txtProject.getText();
 
-
             String date;
             double start;
             double end;
@@ -109,12 +109,9 @@ public class WorkTimeRecordEntryController {
             String notes = txtNotes.getText();
 
             double workedHours = (end - start) - pause;
-            // if (workedHours < 0) workedHours = 0;
-
             worktimeModel.addHours(workedHours);
 
             try (PrintWriter writer = new PrintWriter(new FileWriter("csv/entries.csv", true))) {
-                // TODO: First entry gets written next to the header -> need to fix it
                 writer.println(mid + ";" + firstName + ";" + lastName + ";" + project + ";" + date + ";" + start + ";" + end + ";" + pause + ";" + assignment + ";" + notes);
 
                 clearInput();

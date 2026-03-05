@@ -36,12 +36,4 @@ public class WorktimeModel {
             logger.log(e.getMessage());
         }
     }
-
-    public void clearHours() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(saveFile))) {
-            writer.write("");
-        } catch (IOException e) {
-            logger.log(e.getMessage());
-        }
-    }
 }
