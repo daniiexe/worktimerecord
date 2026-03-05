@@ -110,6 +110,7 @@ public class WorkTimeRecordEntryController {
             worktimeModel.addHours(workedHours);
 
             try (PrintWriter writer = new PrintWriter(new FileWriter("csv/entries.csv", true))) {
+                // TODO: First entry gets written next to the header -> need to fix it
                 writer.println(mid + ";" + firstName + ";" + lastName + ";" + project + ";" + date + ";" + start + ";" + end + ";" + pause + ";" + assignment + ";" + notes);
 
                 clearInput();
