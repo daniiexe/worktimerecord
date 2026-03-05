@@ -8,16 +8,6 @@
 
 <VBox alignment="TOP_CENTER" prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.httle.steiner.worktimerecord.controllers.WorkTimeRecordController">
     <children>
-        <!--
-        <MenuBar VBox.vgrow="NEVER">
-            <menus>
-                <Menu text="Datei"><items><MenuItem text="Beenden" /></items></Menu>
-                <Menu text="Bearbeiten"><items><MenuItem text="Rückgängig" /></items></Menu>
-                <Menu text="Hilfe"><items><MenuItem text="Über" /></items></Menu>
-            </menus>
-        </MenuBar>
-        -->
-
         <AnchorPane VBox.vgrow="ALWAYS">
             <children>
                 <HBox fx:id="statHeader" alignment="CENTER" prefHeight="90.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
@@ -41,24 +31,30 @@
                     <children>
                         <Button fx:id="btnEntry" defaultButton="true" maxWidth="Infinity" minHeight="50.0" mnemonicParsing="false" prefHeight="50.0" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;" text="ARBEITSZEIT EINTRAGEN" VBox.vgrow="NEVER">
                             <font><Font size="14.0" /></font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
                         </Button>
 
                         <Label text="Letzte Einträge:">
                             <font><Font name="System Bold" size="13.0" /></font>
                         </Label>
 
-                        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-border-color: #dcdde1;" VBox.vgrow="ALWAYS">
-                            <content>
-                                <VBox fx:id="csvListContainer" spacing="5.0" style="-fx-padding: 10; -fx-background-color: white;">
-                                    <children>
-                                        <Label maxWidth="Infinity" style="-fx-background-color: #ecf0f1; -fx-padding: 8; -fx-background-radius: 3;" text="MID: 1, Habaz Klaus, 02.03.2026, 5:00 Uhr - 16:00 Uhr, Aufagaben: Sieg, NOtizen: Heil" />
-                                    </children>
-                                </VBox>
-                            </content>
-                        </ScrollPane>
+                        <!-- ScrollPane mit TableView -->
+                        <TableView style="-fx-background-color: transparent; -fx-border-color: #dcdde1;" VBox.vgrow="ALWAYS" fx:id="workTimeTable" prefHeight="900" prefWidth="800.0">
+                            <columns>
+                                <TableColumn fx:id="colMID" text="MID" prefWidth="50.0"/>
+                                <TableColumn fx:id="colLastname" text="Lastname" prefWidth="150.0"/>
+                                <TableColumn fx:id="colFirstname" text="Firstname" prefWidth="150.0"/>
+                                <TableColumn fx:id="colProject" text="Project" prefWidth="150.0"/>
+                                <TableColumn fx:id="colDate" text="Date" prefWidth="150.0"/>
+                                <TableColumn fx:id="colStart" text="Start" prefWidth="150.0"/>
+                                <TableColumn fx:id="colEnd" text="End" prefWidth="150.0"/>
+                                <TableColumn fx:id="colPause" text="Pause" prefWidth="150.0"/>
+                                <TableColumn fx:id="colAssignment" text="Assignment" prefWidth="200.0"/>
+                                <TableColumn fx:id="colNotes" text="Notes" prefWidth="200.0"/>
+                            </columns>
+                        </TableView>
                     </children>
                 </VBox>
             </children>

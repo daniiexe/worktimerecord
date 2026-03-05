@@ -1,18 +1,27 @@
 package org.httle.steiner.worktimerecord.controllers;
 
 import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.httle.steiner.worktimerecord.constants.Constants;
+import org.httle.steiner.worktimerecord.model.EntryModel;
 import org.httle.steiner.worktimerecord.model.Logger;
 import org.httle.steiner.worktimerecord.model.WorktimeModel;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * Controller for the worktime record UI (landing ui)
@@ -28,13 +37,37 @@ public class WorkTimeRecordController {
     @FXML private Label lbHoursWorked;
     @FXML private Label lbHoursRest;
 
+    @FXML private TableView<EntryModel> workTimeTable;
+    @FXML private TableColumn<EntryModel, String> colMID;
+    @FXML private TableColumn<EntryModel, String> colLastname;
+    @FXML private TableColumn<EntryModel, String> colFirstname;
+    @FXML private TableColumn<EntryModel, String> colProject;
+    @FXML private TableColumn<EntryModel, String> colDate;
+    @FXML private TableColumn<EntryModel, String> colStart;
+    @FXML private TableColumn<EntryModel, String> colEnd;
+    @FXML private TableColumn<EntryModel, String> colPause;
+    @FXML private TableColumn<EntryModel, String> colAssignment;
+    @FXML private TableColumn<EntryModel, String> colNotes;
+
     private WorktimeModel worktimeModel;
     private final Logger logger = Logger.getInstance();
 
     @FXML
     public void initialize() {
+        colMID.setCellValueFactory(new PropertyValueFactory<>("mid"));
+        colLastname.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        colFirstname.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        colProject.setCellValueFactory(new PropertyValueFactory<>("project"));
+        colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        colStart.setCellValueFactory(new PropertyValueFactory<>("start"));
+        colEnd.setCellValueFactory(new PropertyValueFactory<>("end"));
+        colPause.setCellValueFactory(new PropertyValueFactory<>("pause"));
+        colAssignment.setCellValueFactory(new PropertyValueFactory<>("assignment"));
+        colNotes.setCellValueFactory(new PropertyValueFactory<>("notes"));
+
         btnEntry.setOnAction(e -> openInputWindow());
         lbHoursSummary.setText("Gesamt: " + Constants.TOTAL_WORKINGHOURS + "h");
+        enterEntries();
     }
 
     // Setting the worktime model in order to communicate between classes with the same worked hours values
@@ -52,6 +85,36 @@ public class WorkTimeRecordController {
         }, worktimeModel.workedHoursProperty())
         );
 
+    }
+
+    // TODO: Create new entries with the information form the ./csv/entries.csv
+    private void enterEntries() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("csv/entries.csv"))) {
+            String line;
+            reader.readLine();
+
+            ObservableList<EntryModel> entries = FXCollections.observableArrayList();
+
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(";");
+
+                EntryModel entry = new EntryModel(
+                        parts[0], parts[1],parts[2],
+                        parts[3], parts[4], parts[5],
+                        parts[6], parts[7], parts[8],
+                        parts[9]
+                        );
+
+                entries.add(entry);
+
+                System.out.println(Arrays.toString(parts));
+            }
+
+            workTimeTable.setItems(entries);
+
+        } catch (IOException e) {
+            logger.log(e.getMessage());
+        }
     }
 
     // Opens up the input window in which is the form for a new entry
@@ -74,6 +137,4 @@ public class WorkTimeRecordController {
             logger.log(e.getMessage());
         }
     }
-
-    // TODO: Create new entries with the information form the ./csv/entries.csv
 }
