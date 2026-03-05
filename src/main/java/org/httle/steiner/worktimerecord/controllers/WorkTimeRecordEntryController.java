@@ -76,10 +76,31 @@ public class WorkTimeRecordEntryController {
             firstName = txtFirstname.getText();
             lastName = txtLastname.getText();
             project = txtProject.getText();
-            date = txtDate.getValue().toString();
-            start = Double.parseDouble(txtStart.getText());
-            end = Double.parseDouble(txtEnd.getText());
-            pause = Double.parseDouble(txtPause.getText());
+
+            if (txtDate.getValue() != null) {
+                date = txtDate.getValue().toString();
+            } else {
+                date = "";
+            }
+
+            if (txtStart.getText().isEmpty()) {
+                start = 0;
+            } else {
+                start = Double.parseDouble(txtStart.getText());
+            }
+
+            if (txtEnd.getText().isEmpty()) {
+                end = 0;
+            } else {
+                end = Double.parseDouble(txtEnd.getText());
+            }
+
+            if (txtPause.getText().isEmpty()) {
+                pause = 0;
+            } else {
+                pause = Double.parseDouble(txtPause.getText());
+            }
+
             assignment = txtAssignment.getText();
             notes = txtNotes.getText();
 
@@ -89,7 +110,6 @@ public class WorkTimeRecordEntryController {
             worktimeModel.addHours(workedHours);
 
             try (PrintWriter writer = new PrintWriter(new FileWriter("csv/entries.csv", true))) {
-
                 writer.println(mid + ";" + firstName + ";" + lastName + ";" + project + ";" + date + ";" + start + ";" + end + ";" + pause + ";" + assignment + ";" + notes);
 
                 clearInput();
@@ -97,10 +117,12 @@ public class WorkTimeRecordEntryController {
 
             } catch (IOException e) {
                 logger.log(e.getMessage());
+                e.printStackTrace();
             }
 
         } catch (Exception e) {
             logger.log(e.getMessage());
+            e.printStackTrace();
         }
     }
 }
