@@ -9,7 +9,5 @@ module org.httle.steiner.worktimerecord {
     opens org.httle.steiner.worktimerecord.controllers to javafx.fxml;
     opens org.httle.steiner.worktimerecord.model to javafx.fxml;
     exports org.httle.steiner.worktimerecord.model;
-    exports org.httle.steiner;
-    opens org.httle.steiner to javafx.fxml;
 
 }

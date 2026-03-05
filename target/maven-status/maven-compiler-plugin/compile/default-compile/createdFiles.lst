@@ -1,0 +1,9 @@
+module-info.class
+org\httle\steiner\worktimerecord\model\builder\Entry$EntryBuilder.class
+org\httle\steiner\worktimerecord\controllers\WorkTimeRecordController.class
+org\httle\steiner\worktimerecord\model\builder\Entry.class
+org\httle\steiner\worktimerecord\constants\Constants.class
+org\httle\steiner\worktimerecord\controllers\WorkTimeRecordEntryController.class
+org\httle\steiner\worktimerecord\WorkTimeRecord.class
+org\httle\steiner\worktimerecord\model\Logger.class
+org\httle\steiner\worktimerecord\model\WorktimeModel.class

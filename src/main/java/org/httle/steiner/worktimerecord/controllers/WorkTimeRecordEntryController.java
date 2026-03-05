@@ -6,11 +6,20 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.httle.steiner.worktimerecord.constants.Constants;
 import org.httle.steiner.worktimerecord.model.Logger;
 import org.httle.steiner.worktimerecord.model.WorktimeModel;
 
 import java.io.*;
+
+/**
+ * Controller for the worktime entry UI and saving the values into csv files
+
+ * Behavior summary:
+ * - create new entries
+ * - clear the form
+ * - all entries are getting saved in entries.csv file in the root of the project in the directory csv
+ *      - ./csv/entries.csv
+ */
 
 public class WorkTimeRecordEntryController {
     @FXML private Button btnCreate;
@@ -26,17 +35,6 @@ public class WorkTimeRecordEntryController {
     @FXML private TextField txtPause;
     @FXML private TextArea txtAssignment;
     @FXML private TextArea txtNotes;
-
-    private String mid;
-    private String firstName;
-    private String lastName;
-    private String project;
-    private String date;
-    private double start;
-    private double end;
-    private double pause;
-    private String assignment;
-    private String notes;
 
     private WorktimeModel worktimeModel;
     private final Logger logger = Logger.getInstance();
@@ -72,10 +70,16 @@ public class WorkTimeRecordEntryController {
         try {
             if (worktimeModel == null) {System.err.println("WorktimeModel is null!"); return;}
 
-            mid = txtMID.getText();
-            firstName = txtFirstname.getText();
-            lastName = txtLastname.getText();
-            project = txtProject.getText();
+            String mid = txtMID.getText();
+            String firstName = txtFirstname.getText();
+            String lastName = txtLastname.getText();
+            String project = txtProject.getText();
+
+
+            String date;
+            double start;
+            double end;
+            double pause;
 
             if (txtDate.getValue() != null) {
                 date = txtDate.getValue().toString();
@@ -101,11 +105,11 @@ public class WorkTimeRecordEntryController {
                 pause = Double.parseDouble(txtPause.getText());
             }
 
-            assignment = txtAssignment.getText();
-            notes = txtNotes.getText();
+            String assignment = txtAssignment.getText();
+            String notes = txtNotes.getText();
 
             double workedHours = (end - start) - pause;
-            if (workedHours < 0) workedHours = 0;
+            // if (workedHours < 0) workedHours = 0;
 
             worktimeModel.addHours(workedHours);
 
@@ -118,12 +122,10 @@ public class WorkTimeRecordEntryController {
 
             } catch (IOException e) {
                 logger.log(e.getMessage());
-                e.printStackTrace();
             }
 
         } catch (Exception e) {
             logger.log(e.getMessage());
-            e.printStackTrace();
         }
     }
 }
