@@ -2,6 +2,7 @@ package org.httle.steiner.worktimerecord.model;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import org.httle.steiner.worktimerecord.util.Logger;
 
 import java.io.*;
 

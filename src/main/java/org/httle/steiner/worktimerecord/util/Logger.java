@@ -1,4 +1,4 @@
-package org.httle.steiner.worktimerecord.model;
+package org.httle.steiner.worktimerecord.util;
 
 public class Logger {
     private static Logger instance;

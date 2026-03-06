@@ -6,7 +6,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.httle.steiner.worktimerecord.model.Logger;
+import org.httle.steiner.worktimerecord.util.Logger;
 import org.httle.steiner.worktimerecord.model.WorktimeModel;
 
 import java.io.*;

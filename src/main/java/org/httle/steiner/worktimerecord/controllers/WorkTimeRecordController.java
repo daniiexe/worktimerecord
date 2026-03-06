@@ -8,18 +8,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.httle.steiner.worktimerecord.constants.Constants;
 import org.httle.steiner.worktimerecord.model.EntryModel;
-import org.httle.steiner.worktimerecord.model.Logger;
+import org.httle.steiner.worktimerecord.util.Logger;
 import org.httle.steiner.worktimerecord.model.WorktimeModel;
 
+import javax.swing.*;
 import java.io.*;
-import java.lang.module.ModuleDescriptor;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 /**
  * Controller for the worktime record UI (landing ui)
@@ -68,7 +70,7 @@ public class WorkTimeRecordController {
         colNotes.setCellValueFactory(new PropertyValueFactory<>("notes"));
 
         btnEntry.setOnAction(e -> openInputWindow());
-        // menuItemExport.setOnAction(e -> exportCSVFile());
+        menuItemExport.setOnAction(e -> exportCSVFile());
         lbHoursSummary.setText("Gesamt: " + Constants.TOTAL_WORKINGHOURS + "h");
         enterEntries();
     }
@@ -139,14 +141,27 @@ public class WorkTimeRecordController {
         }
     }
 
-//    private void exportCSVFile() {
-//        try {
-//            File csvFile = Path.of("csv/entries.csv").toFile();
-//            Path target = Path.of("C://");
-//
-//            Files.copy(csvFile.toPath(), target);
-//        } catch (IOException e) {
-//            logger.log(e.getMessage());
-//        }
-//    }
+    private void exportCSVFile() {
+        Stage stage = (Stage) btnEntry.getScene().getWindow();
+        String sourcePath = "csv/entries.csv";
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Export CSV file");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("CSV files", "*.csv"),
+                new FileChooser.ExtensionFilter("Text file", "*.txt")
+        );
+        fileChooser.setInitialFileName("entries");
+
+        File file = fileChooser.showSaveDialog(stage);
+
+        if (file != null) {
+            try {
+                Files.copy(Paths.get(sourcePath), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                logger.log(e.getMessage());
+            }
+        }
+
+    }
 }
