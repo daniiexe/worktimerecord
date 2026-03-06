@@ -26,4 +26,84 @@ public class EntryModel {
         this.assignment = new SimpleStringProperty(assignment);
         this.notes = new SimpleStringProperty(notes);
     }
+
+    public String getNotes() {
+        return notes.get();
+    }
+
+    public SimpleStringProperty notesProperty() {
+        return notes;
+    }
+
+    public String getAssignment() {
+        return assignment.get();
+    }
+
+    public SimpleStringProperty assignmentProperty() {
+        return assignment;
+    }
+
+    public String getPause() {
+        return pause.get();
+    }
+
+    public SimpleStringProperty pauseProperty() {
+        return pause;
+    }
+
+    public String getEnd() {
+        return end.get();
+    }
+
+    public SimpleStringProperty endProperty() {
+        return end;
+    }
+
+    public String getStart() {
+        return start.get();
+    }
+
+    public SimpleStringProperty startProperty() {
+        return start;
+    }
+
+    public String getDate() {
+        return date.get();
+    }
+
+    public SimpleStringProperty dateProperty() {
+        return date;
+    }
+
+    public String getProject() {
+        return project.get();
+    }
+
+    public SimpleStringProperty projectProperty() {
+        return project;
+    }
+
+    public String getFirstName() {
+        return firstName.get();
+    }
+
+    public SimpleStringProperty firstNameProperty() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName.get();
+    }
+
+    public SimpleStringProperty lastNameProperty() {
+        return lastName;
+    }
+
+    public String getMid() {
+        return mid.get();
+    }
+
+    public SimpleStringProperty midProperty() {
+        return mid;
+    }
 }

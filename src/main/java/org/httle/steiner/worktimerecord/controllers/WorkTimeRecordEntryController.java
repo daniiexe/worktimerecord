@@ -121,6 +121,7 @@ public class WorkTimeRecordEntryController {
                 logger.log(e.getMessage());
             }
 
+
         } catch (Exception e) {
             logger.log(e.getMessage());
         }

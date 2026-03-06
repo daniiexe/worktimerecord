@@ -8,6 +8,20 @@
 
 <VBox alignment="TOP_CENTER" prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.httle.steiner.worktimerecord.controllers.WorkTimeRecordController">
     <children>
+        <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
+            <menus>
+                <Menu fx:id="file" text="File">
+                    <items>
+                        <MenuItem fx:id="menuItemExport"  text="Export" />
+                    </items>
+                </Menu>
+                <!--
+                <Menu text="Bearbeiten"><items><MenuItem text="Rückgängig" /></items></Menu>
+                <Menu text="Hilfe"><items><MenuItem text="Über" /></items></Menu>
+                -->
+            </menus>
+        </MenuBar>
+        
         <AnchorPane VBox.vgrow="ALWAYS">
             <children>
                 <HBox fx:id="statHeader" alignment="CENTER" prefHeight="90.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">

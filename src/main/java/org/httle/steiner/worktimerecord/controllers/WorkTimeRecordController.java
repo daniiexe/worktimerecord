@@ -6,10 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -18,9 +15,10 @@ import org.httle.steiner.worktimerecord.model.EntryModel;
 import org.httle.steiner.worktimerecord.model.Logger;
 import org.httle.steiner.worktimerecord.model.WorktimeModel;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.lang.module.ModuleDescriptor;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Arrays;
 
 /**
@@ -49,6 +47,10 @@ public class WorkTimeRecordController {
     @FXML private TableColumn<EntryModel, String> colAssignment;
     @FXML private TableColumn<EntryModel, String> colNotes;
 
+    @FXML private MenuBar menuBar;
+    @FXML private Menu file;
+    @FXML private MenuItem menuItemExport;
+
     private WorktimeModel worktimeModel;
     private final Logger logger = Logger.getInstance();
 
@@ -66,6 +68,7 @@ public class WorkTimeRecordController {
         colNotes.setCellValueFactory(new PropertyValueFactory<>("notes"));
 
         btnEntry.setOnAction(e -> openInputWindow());
+        // menuItemExport.setOnAction(e -> exportCSVFile());
         lbHoursSummary.setText("Gesamt: " + Constants.TOTAL_WORKINGHOURS + "h");
         enterEntries();
     }
@@ -106,8 +109,6 @@ public class WorkTimeRecordController {
                         );
 
                 entries.add(entry);
-
-                System.out.println(Arrays.toString(parts));
             }
 
             workTimeTable.setItems(entries);
@@ -137,4 +138,15 @@ public class WorkTimeRecordController {
             logger.log(e.getMessage());
         }
     }
+
+//    private void exportCSVFile() {
+//        try {
+//            File csvFile = Path.of("csv/entries.csv").toFile();
+//            Path target = Path.of("C://");
+//
+//            Files.copy(csvFile.toPath(), target);
+//        } catch (IOException e) {
+//            logger.log(e.getMessage());
+//        }
+//    }
 }
