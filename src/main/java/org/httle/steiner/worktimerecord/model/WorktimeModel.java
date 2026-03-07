@@ -6,6 +6,13 @@ import org.httle.steiner.worktimerecord.util.Logger;
 
 import java.io.*;
 
+/**
+ * Model for the worktime to communicate the worked hours between classes
+
+ * Behavior summary:
+ * - load hours from a csv file and save them into it (override)
+ * - with this class the worked hours can be communicated between different controller classes without using a public static variable or/and method
+ */
 
 // TODO: Translate decimal numbers to hour unit numbers
 public class WorktimeModel {

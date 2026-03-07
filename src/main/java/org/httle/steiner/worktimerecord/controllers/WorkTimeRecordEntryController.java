@@ -22,7 +22,7 @@ import java.io.*;
  */
 
 public class WorkTimeRecordEntryController {
-    @FXML private Button btnCreate;
+    @FXML private Button btnSave;
     @FXML private Button btnCancel;
     @FXML private Button btnClear;
 
@@ -44,7 +44,7 @@ public class WorkTimeRecordEntryController {
 
     @FXML
     public void initialize() {
-        btnCreate.setOnAction(e -> createEntry());
+        btnSave.setOnAction(e -> createEntry());
         btnCancel.setOnAction(e -> closeInputWindow());
         btnClear.setOnAction(e -> clearInput());
     }
@@ -116,12 +116,9 @@ public class WorkTimeRecordEntryController {
 
                 clearInput();
                 closeInputWindow();
-
             } catch (IOException e) {
                 logger.log(e.getMessage());
             }
-
-
         } catch (Exception e) {
             logger.log(e.getMessage());
         }

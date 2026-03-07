@@ -2,6 +2,14 @@ package org.httle.steiner.worktimerecord.model;
 
 import javafx.beans.property.SimpleStringProperty;
 
+/**
+ * Model for the entry to save in the tableview
+
+ * Behavior summary:
+ * - create new entry
+ * - save variables from the entry in a object and load them into the tableview
+ */
+
 public class EntryModel {
     private final SimpleStringProperty mid;
     private final SimpleStringProperty lastName;

@@ -29,6 +29,7 @@ import java.nio.file.StandardCopyOption;
  * Behavior summary:
  * - display the total hours per week, worked hours and the hours that still need to be worked in the calendar week
  * - display all worked entries with the employee information
+ * - exports the .csv file with the menu file>export on local computer
  */
 
 public class WorkTimeRecordController {
@@ -54,8 +55,26 @@ public class WorkTimeRecordController {
     @FXML private MenuItem menuItemExport;
 
     private WorktimeModel worktimeModel;
+
+    // Setting the worktime model in order to communicate between classes with the same worked hours values
+    public void setWorktimeModel(WorktimeModel worktimeModel) {
+        this.worktimeModel = worktimeModel;
+
+        // %.2fh due to -> % begin of placeholder, .2 -> decimal places, f -> double/float, h -> just to show the unit
+        lbHoursWorked.textProperty().bind(worktimeModel.workedHoursProperty().asString("Workhours: %.2fh"));
+
+        lbHoursRest.textProperty().bind(Bindings.createStringBinding(() -> {
+                    double rest = Constants.TOTAL_WORKINGHOURS - worktimeModel.getWorkedHours();
+
+                    if (rest < 0) {return String.format("Overtime: %.2fh", Math.abs(rest));}
+                    else {return String.format("Remaining: %.2fh", rest);}
+                }, worktimeModel.workedHoursProperty())
+        );
+    }
+
     private final Logger logger = Logger.getInstance();
 
+    // Initializing all FXML components
     @FXML
     public void initialize() {
         colMID.setCellValueFactory(new PropertyValueFactory<>("mid"));
@@ -71,28 +90,31 @@ public class WorkTimeRecordController {
 
         btnEntry.setOnAction(e -> openInputWindow());
         menuItemExport.setOnAction(e -> exportCSVFile());
-        lbHoursSummary.setText("Gesamt: " + Constants.TOTAL_WORKINGHOURS + "h");
+        lbHoursSummary.setText("Total working hours: " + Constants.TOTAL_WORKINGHOURS + "h");
         enterEntries();
     }
 
-    // Setting the worktime model in order to communicate between classes with the same worked hours values
-    public void setWorktimeModel(WorktimeModel worktimeModel) {
-        this.worktimeModel = worktimeModel;
+    // Opens up the input window in which is the form for a new entry
+    private void openInputWindow() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("worktimerecordentry.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
 
-        // %.2fh due to -> % begin of placeholder, .2 -> decimal places, f -> double/float, h -> just to show the unit
-        lbHoursWorked.textProperty().bind(worktimeModel.workedHoursProperty().asString("Arbeitsstunden: %.2fh"));
+            WorkTimeRecordEntryController entryController = fxmlLoader.getController();
+            entryController.setWorktimeModel(worktimeModel);
 
-        lbHoursRest.textProperty().bind(Bindings.createStringBinding(() -> {
-            double rest = Constants.TOTAL_WORKINGHOURS - worktimeModel.getWorkedHours();
-
-            if (rest < 0) {return String.format("Überstunden: %.2fh", Math.abs(rest));}
-            else {return String.format("Verbleibend: %.2fh", rest);}
-        }, worktimeModel.workedHoursProperty())
-        );
-
+            stage.setTitle("Create new entry");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initOwner(btnEntry.getScene().getWindow());
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            logger.log(e.getMessage());
+        }
     }
 
-    // TODO: Create new entries with the information form the ./csv/entries.csv
+    // Creates a new entry in the work time view table
     private void enterEntries() {
         try (BufferedReader reader = new BufferedReader(new FileReader("csv/entries.csv"))) {
             String line;
@@ -109,33 +131,9 @@ public class WorkTimeRecordController {
                         parts[6], parts[7], parts[8],
                         parts[9]
                         );
-
                 entries.add(entry);
             }
-
             workTimeTable.setItems(entries);
-
-        } catch (IOException e) {
-            logger.log(e.getMessage());
-        }
-    }
-
-    // Opens up the input window in which is the form for a new entry
-    private void openInputWindow() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("worktimerecordentry.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
-            Stage stage = new Stage();
-
-            WorkTimeRecordEntryController entryController = fxmlLoader.getController();
-            entryController.setWorktimeModel(worktimeModel);
-
-            stage.setTitle("Neuen Eintrag erstellen");
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initOwner(btnEntry.getScene().getWindow());
-            stage.setScene(scene);
-            stage.show();
-
         } catch (IOException e) {
             logger.log(e.getMessage());
         }
@@ -148,10 +146,10 @@ public class WorkTimeRecordController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Export CSV file");
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("CSV files", "*.csv"),
-                new FileChooser.ExtensionFilter("Text file", "*.txt")
+                new FileChooser.ExtensionFilter("CSV files", "*.csv"), // Can be saved as a .csv -
+                new FileChooser.ExtensionFilter("Text file", "*.txt")  // or .txt file
         );
-        fileChooser.setInitialFileName("entries");
+        fileChooser.setInitialFileName("entries"); // Presetting the filename
 
         File file = fileChooser.showSaveDialog(stage);
 
@@ -162,6 +160,5 @@ public class WorkTimeRecordController {
                 logger.log(e.getMessage());
             }
         }
-
     }
 }

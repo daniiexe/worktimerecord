@@ -15,26 +15,22 @@
                         <MenuItem fx:id="menuItemExport"  text="Export" />
                     </items>
                 </Menu>
-                <!--
-                <Menu text="Bearbeiten"><items><MenuItem text="Rückgängig" /></items></Menu>
-                <Menu text="Hilfe"><items><MenuItem text="Über" /></items></Menu>
-                -->
             </menus>
         </MenuBar>
         
         <AnchorPane VBox.vgrow="ALWAYS">
             <children>
-                <HBox fx:id="statHeader" alignment="CENTER" prefHeight="90.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
+                <HBox alignment="CENTER" prefHeight="90.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
                     <children>
-                        <Label fx:id="lbHoursSummary" alignment="CENTER" prefHeight="60.0" prefWidth="400.0" style="-fx-border-color: #bdc3c7; -fx-border-radius: 8; -fx-background-color: #f8f9fa;" text="Gesamt: NULL">
+                        <Label fx:id="lbHoursSummary" alignment="CENTER" prefHeight="60.0" prefWidth="400.0" style="-fx-border-color: #bdc3c7; -fx-border-radius: 8; -fx-background-color: #f8f9fa;" text="NULL">
                             <font><Font name="System Bold" size="14.0" /></font>
                             <HBox.margin><Insets left="15.0" right="15.0" /></HBox.margin>
                         </Label>
-                        <Label fx:id="lbHoursWorked" alignment="CENTER" prefHeight="60.0" prefWidth="400.0" style="-fx-border-color: #bdc3c7; -fx-border-radius: 8; -fx-background-color: #f8f9fa;" text="Arbeitsstunden: NULL">
+                        <Label fx:id="lbHoursWorked" alignment="CENTER" prefHeight="60.0" prefWidth="400.0" style="-fx-border-color: #bdc3c7; -fx-border-radius: 8; -fx-background-color: #f8f9fa;" text="NULL">
                             <font><Font name="System Bold" size="14.0" /></font>
                             <HBox.margin><Insets left="15.0" right="15.0" /></HBox.margin>
                         </Label>
-                        <Label fx:id="lbHoursRest" alignment="CENTER" prefHeight="60.0" prefWidth="400.0" style="-fx-border-color: #bdc3c7; -fx-border-radius: 8; -fx-background-color: #f8f9fa;" text="Verbleibend: NULL">
+                        <Label fx:id="lbHoursRest" alignment="CENTER" prefHeight="60.0" prefWidth="400.0" style="-fx-border-color: #bdc3c7; -fx-border-radius: 8; -fx-background-color: #f8f9fa;" text="NULL">
                             <font><Font name="System Bold" size="14.0" /></font>
                             <HBox.margin><Insets left="15.0" right="15.0" /></HBox.margin>
                         </Label>
@@ -43,18 +39,17 @@
 
                 <VBox spacing="10.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="155.0" AnchorPane.rightAnchor="155.0" AnchorPane.topAnchor="110.0">
                     <children>
-                        <Button fx:id="btnEntry" defaultButton="true" maxWidth="Infinity" minHeight="50.0" mnemonicParsing="false" prefHeight="50.0" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;" text="ARBEITSZEIT EINTRAGEN" VBox.vgrow="NEVER">
+                        <Button fx:id="btnEntry" defaultButton="true" maxWidth="Infinity" minHeight="50.0" mnemonicParsing="false" prefHeight="50.0" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;" text="Enter working hours" VBox.vgrow="NEVER">
                             <font><Font size="14.0" /></font>
                             <cursor>
                                 <Cursor fx:constant="HAND" />
                             </cursor>
                         </Button>
 
-                        <Label text="Letzte Einträge:">
+                        <Label text="Last entries:">
                             <font><Font name="System Bold" size="13.0" /></font>
                         </Label>
 
-                        <!-- ScrollPane mit TableView -->
                         <TableView style="-fx-background-color: transparent; -fx-border-color: #dcdde1;" VBox.vgrow="ALWAYS" fx:id="workTimeTable" prefHeight="900" prefWidth="800.0">
                             <columns>
                                 <TableColumn fx:id="colMID" text="MID" prefWidth="50.0"/>
