@@ -115,8 +115,6 @@ public class WorkTimeRecordEntryController {
             double workedHours = (end - start) - pause;
             worktimeModel.addHours(workedHours);
 
-
-
             try (PrintWriter writer = new PrintWriter(new FileWriter(Constants.ENTRIES_CSV_FILE.toFile(), true))) {
                 writer.println(mid + ";" + firstName + ";" + lastName + ";" + project + ";" + date + ";" + start + ";" + end + ";" + pause + ";" + assignment + ";" + notes);
 

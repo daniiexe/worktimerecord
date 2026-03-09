@@ -26,7 +26,6 @@ public class WorktimeModel {
     public double getWorkedHours() {return workedHours.get();}
     public DoubleProperty workedHoursProperty() {return workedHours;}
     public void addHours(double hours) {workedHours.set(getWorkedHours() + hours); saveHours();}
-    public void clearHours() {workedHours.set(0);}
 
     private void loadHours() {
         if (!saveFile.exists()) return;
@@ -46,6 +45,15 @@ public class WorktimeModel {
     private void saveHours() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(saveFile))) {
             writer.write(String.valueOf(getWorkedHours()));
+        } catch (IOException e) {
+            logger.log(e.getMessage());
+        }
+    }
+
+    public void clearHours() {
+        workedHours.set(0);
+        try (PrintWriter writer = new PrintWriter(new FileWriter(Constants.WORKED_HOURS_CSV_FILE.toFile()))) {
+            writer.println(0.0);
         } catch (IOException e) {
             logger.log(e.getMessage());
         }

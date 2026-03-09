@@ -165,16 +165,17 @@ public class WorkTimeRecordController {
         }
     }
 
-
+    // Clears all content from the csv file
     private void clearEntriesCSV() {
         try (BufferedReader reader = new BufferedReader(new FileReader(Constants.ENTRIES_CSV_FILE.toFile()));
                 PrintWriter writer = new PrintWriter(new FileWriter(Constants.ENTRIES_CSV_FILE.toFile()))) {
-            reader.readLine();
-            writer.println("mid;lastname;firstname;project;date;start;end;pause;assignment;notes");
+
+            writer.println("mid;lastname;firstname;project;date;start;end;pause;assignment;notes"); // Writes the header of the csv file
 
             while (((reader.readLine()) != null)) {
                 writer.println();
             }
+
             refreshEntries();
             worktimeModel.clearHours();
         } catch (IOException e) {
