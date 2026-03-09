@@ -15,7 +15,6 @@ import java.io.*;
  * - with this class the worked hours can be communicated between different controller classes without using a public static variable or/and method
  */
 
-// TODO: Translate decimal numbers to hour unit numbers
 public class WorktimeModel {
     private final Logger logger = Logger.getInstance();
     private final DoubleProperty workedHours = new SimpleDoubleProperty(0);

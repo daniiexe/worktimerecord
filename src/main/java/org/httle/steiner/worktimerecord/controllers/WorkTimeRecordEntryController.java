@@ -6,6 +6,8 @@ import javafx.stage.Stage;
 import org.httle.steiner.worktimerecord.constants.Constants;
 import org.httle.steiner.worktimerecord.util.Logger;
 import org.httle.steiner.worktimerecord.model.WorktimeModel;
+import org.httle.steiner.worktimerecord.util.TimeFormatter;
+
 import java.io.*;
 
 /**
@@ -35,6 +37,7 @@ public class WorkTimeRecordEntryController {
     @FXML private TextArea txtNotes;
 
     private final Logger logger = Logger.getInstance();
+    private final TimeFormatter timeFormatter = TimeFormatter.getInstance();
     private WorktimeModel worktimeModel;
 
     public void setWorktimeModel(WorktimeModel worktimeModel) {this.worktimeModel = worktimeModel;}
@@ -92,8 +95,13 @@ public class WorkTimeRecordEntryController {
             String notes = "";
             boolean success = false;
 
-            while (!success) {
+            /*
+             * Checking every single text field, datepicker and textarea if it has
+             * any values, if not, method mandatoryErrorPopup(String message)
+             * is being called to inform the user, to enter a value.
+             */
 
+            while (!success) {
                 if (txtMID.getText().isBlank()) {
                     mandatoryErrorPopup("MID must be entered!");
                     break;
@@ -133,21 +141,21 @@ public class WorkTimeRecordEntryController {
                     mandatoryErrorPopup("Start time must be entered!");
                     break;
                 } else {
-                    start = Double.parseDouble(txtStart.getText());
+                    start = timeFormatter.formatTimeToDouble(txtStart.getText());
                 }
 
                 if (txtEnd.getText().isBlank()) {
                     mandatoryErrorPopup("End time must be entered!");
                     break;
                 } else {
-                    end = Double.parseDouble(txtEnd.getText());
+                    end = timeFormatter.formatTimeToDouble(txtEnd.getText());
                 }
 
                 if (txtPause.getText().isBlank()) {
                     mandatoryErrorPopup("Pause time must be entered!");
                     break;
                 } else {
-                    pause = Double.parseDouble(txtPause.getText());
+                    pause = timeFormatter.formatTimeToDouble(txtPause.getText());
                 }
 
                 if (txtAssignment.getText().isBlank()) {
@@ -173,12 +181,12 @@ public class WorkTimeRecordEntryController {
 
             // Writes the entered entry in the csv file
             try (PrintWriter writer = new PrintWriter(new FileWriter(Constants.ENTRIES_CSV_FILE.toFile(), true))) {
-                writer.println(mid + ";" + firstName + ";" + lastName + ";" + project + ";" + date + ";" + start + ";" + end + ";" + pause + ";" + assignment + ";" + notes);
+                writer.println(mid + ";" + firstName + ";" + lastName + ";" + project + ";" + date + ";" + timeFormatter.formatDoubleToTime(start) + ";" + timeFormatter.formatDoubleToTime(end) + ";" + timeFormatter.formatDoubleToTime(pause) + ";" + assignment + ";" + notes);
             } catch (IOException e) {
                 logger.log(e.getMessage());
             }
 
-            // Refreshes the complete tableview
+            // Refreshes the complete tableview, clears all inputs and closes the window
             workTimeRecordController.refreshEntries();
             clearInput();
             closeInputWindow();
@@ -187,8 +195,9 @@ public class WorkTimeRecordEntryController {
         }
     }
 
+    // Method calling used for error popup for mandatory field which are not filled
     private void mandatoryErrorPopup(String message) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
+        Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Mandatory field missing");
         alert.setHeaderText("Error");
         alert.setContentText(message);

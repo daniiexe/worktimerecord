@@ -15,10 +15,13 @@ import org.httle.steiner.worktimerecord.constants.Constants;
 import org.httle.steiner.worktimerecord.model.EntryModel;
 import org.httle.steiner.worktimerecord.util.Logger;
 import org.httle.steiner.worktimerecord.model.WorktimeModel;
+import org.httle.steiner.worktimerecord.util.TimeFormatter;
+
 import javax.swing.*;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Controller for the worktime record UI (landing ui)
@@ -53,19 +56,24 @@ public class WorkTimeRecordController {
 
     private WorktimeModel worktimeModel;
     private final Logger logger = Logger.getInstance();
+    private final TimeFormatter timeFormatter = TimeFormatter.getInstance();
 
     // Setting the worktime model in order to communicate between classes with the same worked hours values
     public void setWorktimeModel(WorktimeModel worktimeModel) {
         this.worktimeModel = worktimeModel;
 
         // %.2fh due to -> % begin of placeholder, .2 -> decimal places, f -> double/float, h -> just to show the unit
-        lbHoursWorked.textProperty().bind(worktimeModel.workedHoursProperty().asString("Workhours: %.2fh"));
+        lbHoursWorked.textProperty().bind(Bindings.createStringBinding(() ->
+                String.format("Workhours: " + timeFormatter.formatDoubleToTime(worktimeModel.getWorkedHours()) + "h"),
+                worktimeModel.workedHoursProperty())
+        );
 
+        // Formatting the double in a String datatype in order to achieve the hh:mm format on the labels
         lbHoursRest.textProperty().bind(Bindings.createStringBinding(() -> {
                     double rest = Constants.TOTAL_WORKINGHOURS - worktimeModel.getWorkedHours();
 
-                    if (rest < 0) {return String.format("Overtime: %.2fh", Math.abs(rest));}
-                    else {return String.format("Remaining: %.2fh", rest);}
+                    if (rest < 0) {return String.format("Overtime: " + timeFormatter.formatDoubleToTime(Math.abs(rest)) + "h");}
+                    else {return String.format("Remaining: " + timeFormatter.formatDoubleToTime(rest) + "h");}
                 }, worktimeModel.workedHoursProperty())
         );
     }
@@ -88,7 +96,7 @@ public class WorkTimeRecordController {
         menuItemExport.setOnAction(e -> exportCSVFile());
         menuItemClear.setOnAction(e -> clearEntriesCSV());
         menuItemExit.setOnAction(e -> exitApplication());
-        lbHoursSummary.setText("Total working hours: " + Constants.TOTAL_WORKINGHOURS + "h");
+        lbHoursSummary.setText("Total working hours: " + timeFormatter.formatDoubleToTime(Constants.TOTAL_WORKINGHOURS) + "h");
         enterEntries();
     }
 
