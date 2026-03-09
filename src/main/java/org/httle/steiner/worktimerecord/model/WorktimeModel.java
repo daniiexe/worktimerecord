@@ -26,6 +26,7 @@ public class WorktimeModel {
     public double getWorkedHours() {return workedHours.get();}
     public DoubleProperty workedHoursProperty() {return workedHours;}
     public void addHours(double hours) {workedHours.set(getWorkedHours() + hours); saveHours();}
+    public void clearHours() {workedHours.set(0);}
 
     private void loadHours() {
         if (!saveFile.exists()) return;

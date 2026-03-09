@@ -49,6 +49,10 @@ The main learning aspect is to learn how to use JavaFX and combine it with basic
     - `csv/workedhours.csv` file got cleared
   - `csv/workedhours.csv` can now be cleared 
     - Menu → File → Clear entries
+    - worked hours getting cleared
+      - when `csv/entries.csv` is cleared
+    - can now exit application
+      - Menu → File → Exit
 
 ---
 

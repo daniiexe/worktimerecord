@@ -49,6 +49,7 @@ public class WorkTimeRecordController {
 
     @FXML private MenuItem menuItemExport;
     @FXML private MenuItem menuItemClear;
+    @FXML private MenuItem menuItemExit;
 
     private WorktimeModel worktimeModel;
     private final Logger logger = Logger.getInstance();
@@ -86,6 +87,7 @@ public class WorkTimeRecordController {
         btnEntry.setOnAction(e -> openInputWindow());
         menuItemExport.setOnAction(e -> exportCSVFile());
         menuItemClear.setOnAction(e -> clearEntriesCSV());
+        menuItemExit.setOnAction(e -> exitApplication());
         lbHoursSummary.setText("Total working hours: " + Constants.TOTAL_WORKINGHOURS + "h");
         enterEntries();
     }
@@ -136,23 +138,6 @@ public class WorkTimeRecordController {
         }
     }
 
-    private void clearEntriesCSV() {
-        try (
-                BufferedReader reader = new BufferedReader(new FileReader(Constants.ENTRIES_CSV_FILE.toFile()));
-                PrintWriter writer = new PrintWriter(new FileWriter(Constants.ENTRIES_CSV_FILE.toFile()))
-                ) {
-            reader.readLine();
-            writer.println("mid;lastname;firstname;project;date;start;end;pause;assignment;notes");
-
-            while (((reader.readLine()) != null)) {
-                writer.println();
-            }
-            refreshEntries();
-        } catch (IOException e) {
-            logger.log(e.getMessage());
-        }
-    }
-
     public void refreshEntries() {
         workTimeTable.getItems().clear();
         enterEntries();
@@ -178,5 +163,27 @@ public class WorkTimeRecordController {
                 logger.log(e.getMessage());
             }
         }
+    }
+
+
+    private void clearEntriesCSV() {
+        try (BufferedReader reader = new BufferedReader(new FileReader(Constants.ENTRIES_CSV_FILE.toFile()));
+                PrintWriter writer = new PrintWriter(new FileWriter(Constants.ENTRIES_CSV_FILE.toFile()))) {
+            reader.readLine();
+            writer.println("mid;lastname;firstname;project;date;start;end;pause;assignment;notes");
+
+            while (((reader.readLine()) != null)) {
+                writer.println();
+            }
+            refreshEntries();
+            worktimeModel.clearHours();
+        } catch (IOException e) {
+            logger.log(e.getMessage());
+        }
+    }
+
+    private void exitApplication() {
+        Stage stage = (Stage) btnEntry.getScene().getWindow();
+        stage.close();
     }
 }
