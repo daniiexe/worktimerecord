@@ -43,6 +43,13 @@ The main learning aspect is to learn how to use JavaFX and combine it with basic
   - added short class description to every class what they should do
   - added a logging file to save all logs with their date and time `log/logs.log`
 
+- 9.3.2026
+  - TableView is now getting refreshed when
+    - new entry is made
+    - `csv/workedhours.csv` file got cleared
+  - `csv/workedhours.csv` can now be cleared 
+    - Menu → File → Clear entries
+
 ---
 
 ### Project ToDos

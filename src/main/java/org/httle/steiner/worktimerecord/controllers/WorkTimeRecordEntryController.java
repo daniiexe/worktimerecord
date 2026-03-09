@@ -8,7 +8,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.httle.steiner.worktimerecord.util.Logger;
 import org.httle.steiner.worktimerecord.model.WorktimeModel;
-
 import java.io.*;
 
 /**
@@ -41,12 +40,16 @@ public class WorkTimeRecordEntryController {
     private WorktimeModel worktimeModel;
 
     public void setWorktimeModel(WorktimeModel worktimeModel) {this.worktimeModel = worktimeModel;}
+    private WorkTimeRecordController workTimeRecordController;
+
+    public void setWorkTimeRecordController(WorkTimeRecordController workTimeRecordController) {this.workTimeRecordController = workTimeRecordController;}
 
     @FXML
     public void initialize() {
         btnSave.setOnAction(e -> createEntry());
         btnCancel.setOnAction(e -> closeInputWindow());
         btnClear.setOnAction(e -> clearInput());
+        txtDate.setEditable(false);
     }
 
     private void closeInputWindow() {
@@ -111,6 +114,8 @@ public class WorkTimeRecordEntryController {
             double workedHours = (end - start) - pause;
             worktimeModel.addHours(workedHours);
 
+
+
             try (PrintWriter writer = new PrintWriter(new FileWriter("csv/entries.csv", true))) {
                 writer.println(mid + ";" + firstName + ";" + lastName + ";" + project + ";" + date + ";" + start + ";" + end + ";" + pause + ";" + assignment + ";" + notes);
 
@@ -119,6 +124,8 @@ public class WorkTimeRecordEntryController {
             } catch (IOException e) {
                 logger.log(e.getMessage());
             }
+
+            workTimeRecordController.refreshEntries();
         } catch (Exception e) {
             logger.log(e.getMessage());
         }

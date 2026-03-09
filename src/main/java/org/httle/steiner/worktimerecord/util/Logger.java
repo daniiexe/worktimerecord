@@ -1,6 +1,5 @@
 package org.httle.steiner.worktimerecord.util;
 
-import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;

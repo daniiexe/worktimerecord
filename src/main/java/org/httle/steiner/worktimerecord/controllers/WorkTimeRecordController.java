@@ -15,11 +15,9 @@ import org.httle.steiner.worktimerecord.constants.Constants;
 import org.httle.steiner.worktimerecord.model.EntryModel;
 import org.httle.steiner.worktimerecord.util.Logger;
 import org.httle.steiner.worktimerecord.model.WorktimeModel;
-
 import javax.swing.*;
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
@@ -50,9 +48,8 @@ public class WorkTimeRecordController {
     @FXML private TableColumn<EntryModel, String> colAssignment;
     @FXML private TableColumn<EntryModel, String> colNotes;
 
-    @FXML private MenuBar menuBar;
-    @FXML private Menu file;
     @FXML private MenuItem menuItemExport;
+    @FXML private MenuItem menuItemClear;
 
     private WorktimeModel worktimeModel;
 
@@ -90,6 +87,7 @@ public class WorkTimeRecordController {
 
         btnEntry.setOnAction(e -> openInputWindow());
         menuItemExport.setOnAction(e -> exportCSVFile());
+        menuItemClear.setOnAction(e -> clearEntriesCSV());
         lbHoursSummary.setText("Total working hours: " + Constants.TOTAL_WORKINGHOURS + "h");
         enterEntries();
     }
@@ -103,6 +101,7 @@ public class WorkTimeRecordController {
 
             WorkTimeRecordEntryController entryController = fxmlLoader.getController();
             entryController.setWorktimeModel(worktimeModel);
+            entryController.setWorkTimeRecordController(this);
 
             stage.setTitle("Create new entry");
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -137,6 +136,29 @@ public class WorkTimeRecordController {
         } catch (IOException e) {
             logger.log(e.getMessage());
         }
+    }
+
+    private void clearEntriesCSV() {
+        try (
+                BufferedReader reader = new BufferedReader(new FileReader("csv/entries.csv"));
+                PrintWriter writer = new PrintWriter(new FileWriter("csv/entries.csv"))
+                ) {
+            reader.readLine();
+            writer.println("mid;lastname;firstname;project;date;start;end;pause;assignment;notes");
+
+            while (((reader.readLine()) != null)) {
+                writer.println();
+            }
+
+            refreshEntries();
+        } catch (IOException e) {
+            logger.log(e.getMessage());
+        }
+    }
+
+    public void refreshEntries() {
+        workTimeTable.getItems().clear();
+        enterEntries();
     }
 
     private void exportCSVFile() {

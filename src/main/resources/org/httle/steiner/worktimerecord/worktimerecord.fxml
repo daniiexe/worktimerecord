@@ -13,6 +13,7 @@
                 <Menu fx:id="file" text="File">
                     <items>
                         <MenuItem fx:id="menuItemExport"  text="Export" />
+                        <MenuItem fx:id="menuItemClear" text="Clear entries" />
                     </items>
                 </Menu>
             </menus>
@@ -50,7 +51,7 @@
                             <font><Font name="System Bold" size="13.0" /></font>
                         </Label>
 
-                        <TableView style="-fx-background-color: transparent; -fx-border-color: #dcdde1;" VBox.vgrow="ALWAYS" fx:id="workTimeTable" prefHeight="900" prefWidth="800.0">
+                        <TableView style="-fx-background-color: transparent; -fx-border-color: #dcdde1;" VBox.vgrow="ALWAYS" fx:id="workTimeTable" prefHeight="900" prefWidth="800.0" >
                             <columns>
                                 <TableColumn fx:id="colMID" text="MID" prefWidth="50.0"/>
                                 <TableColumn fx:id="colLastname" text="Lastname" prefWidth="150.0"/>
