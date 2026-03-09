@@ -10,7 +10,7 @@
     <children>
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
             <menus>
-                <Menu fx:id="file" text="File">
+                <Menu fx:id="menuFile" text="File">
                     <items>
                         <MenuItem fx:id="menuItemExport"  text="Export" />
                         <MenuItem fx:id="menuItemClear" text="Clear entries" />

@@ -1,10 +1,7 @@
 package org.httle.steiner.worktimerecord.controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.httle.steiner.worktimerecord.constants.Constants;
 import org.httle.steiner.worktimerecord.util.Logger;
@@ -83,44 +80,93 @@ public class WorkTimeRecordEntryController {
         try {
             if (worktimeModel == null) {System.err.println("WorktimeModel is null!"); return;}
 
-            String mid = txtMID.getText();
-            String firstName = txtFirstname.getText();
-            String lastName = txtLastname.getText();
-            String project = txtProject.getText();
+            String mid = "";
+            String firstName = "";
+            String lastName = "";
+            String project = "";
+            String date = "";
+            double start = 0.0;
+            double end = 0.0;
+            double pause = 0.0;
+            String assignment = "";
+            String notes = "";
+            boolean success = false;
 
-            String date;
-            double start;
-            double end;
-            double pause;
+            while (!success) {
 
-            // Checks if values aren't null in order to not get any exceptions
-            if (txtDate.getValue() != null) {
-                date = txtDate.getValue().toString();
-            } else {
-                date = "";
+                if (txtMID.getText().isBlank()) {
+                    mandatoryErrorPopup("MID must be entered!");
+                    break;
+                } else {
+                    mid = txtMID.getText();
+                }
+
+                if (txtLastname.getText().isBlank()) {
+                    mandatoryErrorPopup("Lastname must be entered!");
+                    break;
+                } else {
+                    lastName = txtLastname.getText();
+                }
+
+                if (txtFirstname.getText().isBlank()) {
+                    mandatoryErrorPopup("Firstname must be entered!");
+                    break;
+                } else {
+                    firstName = txtFirstname.getText();
+                }
+
+                if (txtProject.getText().isBlank()) {
+                    mandatoryErrorPopup("Project must be entered!");
+                    break;
+                } else {
+                    project = txtProject.getText();
+                }
+
+                if (txtDate.getValue() == null) {
+                    mandatoryErrorPopup("Date must be picked!");
+                    break;
+                } else {
+                    date = txtDate.getValue().toString();
+                }
+
+                if (txtStart.getText().isBlank()) {
+                    mandatoryErrorPopup("Start time must be entered!");
+                    break;
+                } else {
+                    start = Double.parseDouble(txtStart.getText());
+                }
+
+                if (txtEnd.getText().isBlank()) {
+                    mandatoryErrorPopup("End time must be entered!");
+                    break;
+                } else {
+                    end = Double.parseDouble(txtEnd.getText());
+                }
+
+                if (txtPause.getText().isBlank()) {
+                    mandatoryErrorPopup("Pause time must be entered!");
+                    break;
+                } else {
+                    pause = Double.parseDouble(txtPause.getText());
+                }
+
+                if (txtAssignment.getText().isBlank()) {
+                    mandatoryErrorPopup("Assignment must be entered!");
+                    break;
+                } else {
+                    assignment = txtAssignment.getText();
+                }
+
+                if (txtNotes.getText().isBlank()) {
+                    notes = " ";
+                } else {
+                    notes = txtNotes.getText();
+                }
+
+                success = true;
             }
 
-            // Need to prove, if values aren't null because of the following worked hours calculation
-            if (txtStart.getText().isEmpty()) {
-                start = 0;
-            } else {
-                start = Double.parseDouble(txtStart.getText());
-            }
-
-            if (txtEnd.getText().isEmpty()) {
-                end = 0;
-            } else {
-                end = Double.parseDouble(txtEnd.getText());
-            }
-
-            if (txtPause.getText().isEmpty()) {
-                pause = 0;
-            } else {
-                pause = Double.parseDouble(txtPause.getText());
-            }
-
-            String assignment = txtAssignment.getText();
-            String notes = txtNotes.getText();
+            if (!success) return;
 
             double workedHours = (end - start) - pause;
             worktimeModel.addHours(workedHours);
@@ -128,17 +174,24 @@ public class WorkTimeRecordEntryController {
             // Writes the entered entry in the csv file
             try (PrintWriter writer = new PrintWriter(new FileWriter(Constants.ENTRIES_CSV_FILE.toFile(), true))) {
                 writer.println(mid + ";" + firstName + ";" + lastName + ";" + project + ";" + date + ";" + start + ";" + end + ";" + pause + ";" + assignment + ";" + notes);
-
-                clearInput();
-                closeInputWindow();
             } catch (IOException e) {
                 logger.log(e.getMessage());
             }
 
             // Refreshes the complete tableview
             workTimeRecordController.refreshEntries();
+            clearInput();
+            closeInputWindow();
         } catch (Exception e) {
             logger.log(e.getMessage());
         }
+    }
+
+    private void mandatoryErrorPopup(String message) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Mandatory field missing");
+        alert.setHeaderText("Error");
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

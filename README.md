@@ -53,6 +53,8 @@ The main learning aspect is to learn how to use JavaFX and combine it with basic
       - when `csv/entries.csv` is cleared
     - can now exit application
       - Menu → File → Exit
+  - comments how methods and code parts worked added
+    - in every class and by every method
 
 ---
 

@@ -18,34 +18,34 @@
                 <ColumnConstraints hgrow="ALWAYS" />
             </columnConstraints>
             <children>
-                <Label text="Employee ID:" GridPane.rowIndex="0" />
+                <Label text="Employee ID: *" GridPane.rowIndex="0" />
                 <TextField fx:id="txtMID" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-                <Label text="Lastname:" GridPane.rowIndex="1" />
+                <Label text="Lastname: *" GridPane.rowIndex="1" />
                 <TextField fx:id="txtLastname" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-                <Label text="Firstname:" GridPane.rowIndex="2" />
+                <Label text="Firstname: *" GridPane.rowIndex="2" />
                 <TextField fx:id="txtFirstname"  GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-                <Label text="Project:" GridPane.rowIndex="3" />
+                <Label text="Project: *" GridPane.rowIndex="3" />
                 <TextField fx:id="txtProject" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
-                <Label text="Date:" GridPane.rowIndex="4" />
+                <Label text="Date: *" GridPane.rowIndex="4" />
                 <DatePicker fx:id="txtDate" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></DatePicker>
 
-                <Label text="Start-Time:" GridPane.rowIndex="5" />
+                <Label text="Start-Time: *" GridPane.rowIndex="5" />
                 <TextField fx:id="txtStart" promptText="hh:mm" GridPane.columnIndex="1" GridPane.rowIndex="5" />
 
-                <Label text="End-Time:" GridPane.rowIndex="6" />
+                <Label text="End-Time: *" GridPane.rowIndex="6" />
                 <TextField fx:id="txtEnd" promptText="hh:mm" GridPane.columnIndex="1" GridPane.rowIndex="6" />
 
-                <Label text="Pause-Time:" GridPane.rowIndex="7" />
+                <Label text="Pause-Time: *" GridPane.rowIndex="7" />
                 <TextField fx:id="txtPause" promptText="mm" GridPane.columnIndex="1" GridPane.rowIndex="7" />
 
-                <Label text="Assignment:" GridPane.rowIndex="8" />
+                <Label text="Assignment: *" GridPane.rowIndex="8" />
                 <TextArea fx:id="txtAssignment" prefHeight="60.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
 
                 <Label text="Notes:" GridPane.rowIndex="9" />
