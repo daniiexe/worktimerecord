@@ -45,6 +45,7 @@ public class WorkTimeRecordEntryController {
 
     public void setWorkTimeRecordController(WorkTimeRecordController workTimeRecordController) {this.workTimeRecordController = workTimeRecordController;}
 
+    // Initializing all FXML components
     @FXML
     public void initialize() {
         btnSave.setOnAction(e -> createEntry());
@@ -53,11 +54,13 @@ public class WorkTimeRecordEntryController {
         txtDate.setEditable(false);
     }
 
+    // Closes the input window from the entry form
     private void closeInputWindow() {
         Stage btnStage = (Stage) btnCancel.getScene().getWindow();
         btnStage.close();
     }
 
+    // Clears all input values of the entry form
     private void clearInput() {
         txtMID.clear();
         txtFirstname.clear();
@@ -71,6 +74,11 @@ public class WorkTimeRecordEntryController {
         txtNotes.clear();
     }
 
+    /**
+     * Creates a new entry when button is clicked in the entry form
+     * and loads this entry in the csv file and refreshes the tableview
+     * and loads all csv saved entries when calling the refreshEntries() method
+     */
     private void createEntry() {
         try {
             if (worktimeModel == null) {System.err.println("WorktimeModel is null!"); return;}
@@ -85,12 +93,14 @@ public class WorkTimeRecordEntryController {
             double end;
             double pause;
 
+            // Checks if values aren't null in order to not get any exceptions
             if (txtDate.getValue() != null) {
                 date = txtDate.getValue().toString();
             } else {
                 date = "";
             }
 
+            // Need to prove, if values aren't null because of the following worked hours calculation
             if (txtStart.getText().isEmpty()) {
                 start = 0;
             } else {
@@ -115,6 +125,7 @@ public class WorkTimeRecordEntryController {
             double workedHours = (end - start) - pause;
             worktimeModel.addHours(workedHours);
 
+            // Writes the entered entry in the csv file
             try (PrintWriter writer = new PrintWriter(new FileWriter(Constants.ENTRIES_CSV_FILE.toFile(), true))) {
                 writer.println(mid + ";" + firstName + ";" + lastName + ";" + project + ";" + date + ";" + start + ";" + end + ";" + pause + ";" + assignment + ";" + notes);
 
@@ -124,6 +135,7 @@ public class WorkTimeRecordEntryController {
                 logger.log(e.getMessage());
             }
 
+            // Refreshes the complete tableview
             workTimeRecordController.refreshEntries();
         } catch (Exception e) {
             logger.log(e.getMessage());

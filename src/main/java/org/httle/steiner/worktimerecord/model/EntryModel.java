@@ -35,6 +35,7 @@ public class EntryModel {
         this.notes = new SimpleStringProperty(notes);
     }
 
+    // Getters are absolutely necessary in order that the PropertyValueFactory can retrieve their values!
     public String getNotes() {
         return notes.get();
     }

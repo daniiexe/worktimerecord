@@ -28,6 +28,7 @@ public class Logger {
         return instance;
     }
 
+    // Logging all log necessary message into a log file with the specific date and time when the log was logged
     public void log(String message) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(Constants.LOGGING_CSV_FILE.toFile(), true))) {
             writer.println("[Log " + LocalDateTime.now() + "]: " + message);

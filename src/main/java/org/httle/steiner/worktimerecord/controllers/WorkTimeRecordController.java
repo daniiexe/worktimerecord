@@ -121,6 +121,7 @@ public class WorkTimeRecordController {
 
             ObservableList<EntryModel> entries = FXCollections.observableArrayList();
 
+            // All lines in the csv files are getting read and saved in a temporarily EntryModel
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(";");
 
@@ -130,9 +131,9 @@ public class WorkTimeRecordController {
                         parts[6], parts[7], parts[8],
                         parts[9]
                         );
-                entries.add(entry);
+                entries.add(entry); // EntryModel getting saved in ObservableList
             }
-            workTimeTable.setItems(entries);
+            workTimeTable.setItems(entries); // Tableview content/items getting set with the ObservableList
         } catch (IOException e) {
             logger.log(e.getMessage());
         }
@@ -143,6 +144,7 @@ public class WorkTimeRecordController {
         enterEntries();
     }
 
+    // Exports the entries.csv file on the local datastore of the user
     private void exportCSVFile() {
         Stage stage = (Stage) btnEntry.getScene().getWindow();
 
@@ -170,12 +172,19 @@ public class WorkTimeRecordController {
         try (BufferedReader reader = new BufferedReader(new FileReader(Constants.ENTRIES_CSV_FILE.toFile()));
                 PrintWriter writer = new PrintWriter(new FileWriter(Constants.ENTRIES_CSV_FILE.toFile()))) {
 
+            // Writes the header of the csv file
             writer.println("mid;lastname;firstname;project;date;start;end;pause;assignment;notes"); // Writes the header of the csv file
 
+            // Clear all lines except 1, line 2 is empty
             while (((reader.readLine()) != null)) {
                 writer.println();
             }
 
+            /*
+             *  Refreshes the table view, because entries are cleared
+             *  as well as the worked hours, because when no entries
+             *  exit, their can't be any worked hours
+             */
             refreshEntries();
             worktimeModel.clearHours();
         } catch (IOException e) {
@@ -183,8 +192,9 @@ public class WorkTimeRecordController {
         }
     }
 
+    // Exits the application with a MenuItem
     private void exitApplication() {
-        Stage stage = (Stage) btnEntry.getScene().getWindow();
+        Stage stage = (Stage) btnEntry.getScene().getWindow(); // Gets the stage of a fxml component
         stage.close();
     }
 }
