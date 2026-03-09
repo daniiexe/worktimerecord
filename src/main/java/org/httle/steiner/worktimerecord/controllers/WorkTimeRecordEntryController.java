@@ -6,6 +6,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.httle.steiner.worktimerecord.constants.Constants;
 import org.httle.steiner.worktimerecord.util.Logger;
 import org.httle.steiner.worktimerecord.model.WorktimeModel;
 import java.io.*;
@@ -116,7 +117,7 @@ public class WorkTimeRecordEntryController {
 
 
 
-            try (PrintWriter writer = new PrintWriter(new FileWriter("csv/entries.csv", true))) {
+            try (PrintWriter writer = new PrintWriter(new FileWriter(Constants.ENTRIES_CSV_FILE.toFile(), true))) {
                 writer.println(mid + ";" + firstName + ";" + lastName + ";" + project + ";" + date + ";" + start + ";" + end + ";" + pause + ";" + assignment + ";" + notes);
 
                 clearInput();

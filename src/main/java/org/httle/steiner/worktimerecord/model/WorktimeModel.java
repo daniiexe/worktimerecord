@@ -2,6 +2,7 @@ package org.httle.steiner.worktimerecord.model;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import org.httle.steiner.worktimerecord.constants.Constants;
 import org.httle.steiner.worktimerecord.util.Logger;
 
 import java.io.*;
@@ -18,7 +19,7 @@ import java.io.*;
 public class WorktimeModel {
     private final Logger logger = Logger.getInstance();
     private final DoubleProperty workedHours = new SimpleDoubleProperty(0);
-    private final File saveFile = new File("csv/workedhours.csv");
+    private final File saveFile = new File(Constants.WORKED_HOURS_CSV_FILE.toUri());
 
     public WorktimeModel() {loadHours();}
 
@@ -33,6 +34,8 @@ public class WorktimeModel {
             String line = br.readLine();
             if (line != null) {
                 workedHours.set(Double.parseDouble(line));
+            } else {
+                workedHours.set(0);
             }
         } catch (IOException e) {
             logger.log(e.getMessage());

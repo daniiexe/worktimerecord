@@ -1,5 +1,7 @@
 package org.httle.steiner.worktimerecord.util;
 
+import org.httle.steiner.worktimerecord.constants.Constants;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -27,7 +29,7 @@ public class Logger {
     }
 
     public void log(String message) {
-        try (PrintWriter writer = new PrintWriter(new FileWriter("log/logs.log", true))) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(Constants.LOGGING_CSV_FILE.toFile(), true))) {
             writer.println("[Log " + LocalDateTime.now() + "]: " + message);
         } catch (IOException e) {
             e.printStackTrace();

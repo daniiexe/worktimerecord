@@ -18,7 +18,6 @@ import org.httle.steiner.worktimerecord.model.WorktimeModel;
 import javax.swing.*;
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 /**
@@ -52,6 +51,7 @@ public class WorkTimeRecordController {
     @FXML private MenuItem menuItemClear;
 
     private WorktimeModel worktimeModel;
+    private final Logger logger = Logger.getInstance();
 
     // Setting the worktime model in order to communicate between classes with the same worked hours values
     public void setWorktimeModel(WorktimeModel worktimeModel) {
@@ -68,8 +68,6 @@ public class WorkTimeRecordController {
                 }, worktimeModel.workedHoursProperty())
         );
     }
-
-    private final Logger logger = Logger.getInstance();
 
     // Initializing all FXML components
     @FXML
@@ -115,7 +113,7 @@ public class WorkTimeRecordController {
 
     // Creates a new entry in the work time view table
     private void enterEntries() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("csv/entries.csv"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(Constants.ENTRIES_CSV_FILE.toFile()))) {
             String line;
             reader.readLine();
 
@@ -140,8 +138,8 @@ public class WorkTimeRecordController {
 
     private void clearEntriesCSV() {
         try (
-                BufferedReader reader = new BufferedReader(new FileReader("csv/entries.csv"));
-                PrintWriter writer = new PrintWriter(new FileWriter("csv/entries.csv"))
+                BufferedReader reader = new BufferedReader(new FileReader(Constants.ENTRIES_CSV_FILE.toFile()));
+                PrintWriter writer = new PrintWriter(new FileWriter(Constants.ENTRIES_CSV_FILE.toFile()))
                 ) {
             reader.readLine();
             writer.println("mid;lastname;firstname;project;date;start;end;pause;assignment;notes");
@@ -149,7 +147,6 @@ public class WorkTimeRecordController {
             while (((reader.readLine()) != null)) {
                 writer.println();
             }
-
             refreshEntries();
         } catch (IOException e) {
             logger.log(e.getMessage());
@@ -163,7 +160,6 @@ public class WorkTimeRecordController {
 
     private void exportCSVFile() {
         Stage stage = (Stage) btnEntry.getScene().getWindow();
-        String sourcePath = "csv/entries.csv";
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Export CSV file");
@@ -177,7 +173,7 @@ public class WorkTimeRecordController {
 
         if (file != null) {
             try {
-                Files.copy(Paths.get(sourcePath), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                Files.copy(Constants.ENTRIES_CSV_FILE, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
                 logger.log(e.getMessage());
             }
