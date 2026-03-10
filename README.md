@@ -55,6 +55,9 @@ The main learning aspect is to learn how to use JavaFX and combine it with basic
       - Menu → File → Exit
   - comments how methods and code parts worked added
     - in every class and by every method
+  - Added TimeFormatter.java
+  - format time from a double to mm:hh
+  - format time from mm:hh to a double
 
 ---
 
