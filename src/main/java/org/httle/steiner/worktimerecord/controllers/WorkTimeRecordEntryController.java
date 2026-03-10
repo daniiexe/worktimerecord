@@ -151,11 +151,18 @@ public class WorkTimeRecordEntryController {
                     end = timeFormatter.formatTimeToDouble(txtEnd.getText());
                 }
 
+                // TODO: ISSUE: When pause time is < -1, e.g. -0:30, than it's not negative - need to fix
                 if (txtPause.getText().isBlank()) {
                     mandatoryErrorPopup("Pause time must be entered!");
                     break;
+                } else if (timeFormatter.formatTimeToDouble(txtPause.getText()) < 0.0){
+                    pauseErrorPopup("Pause time is negative!");
+                    break;
+                } else if (timeFormatter.formatTimeToDouble(txtPause.getText()) >= (end - start) / 60) {
+                    pauseErrorPopup("Pause time is longer then worked hours");
+                    break;
                 } else {
-                    pause = timeFormatter.formatTimeToDouble(txtPause.getText());
+                    pause = timeFormatter.formatStringToDouble(txtPause.getText());
                 }
 
                 if (txtAssignment.getText().isBlank()) {
@@ -181,7 +188,7 @@ public class WorkTimeRecordEntryController {
 
             // Writes the entered entry in the csv file
             try (PrintWriter writer = new PrintWriter(new FileWriter(Constants.ENTRIES_CSV_FILE.toFile(), true))) {
-                writer.println(mid + ";" + firstName + ";" + lastName + ";" + project + ";" + date + ";" + timeFormatter.formatDoubleToTime(start) + ";" + timeFormatter.formatDoubleToTime(end) + ";" + timeFormatter.formatDoubleToTime(pause) + ";" + assignment + ";" + notes);
+                writer.println(mid + ";" + firstName + ";" + lastName + ";" + project + ";" + date + ";" + timeFormatter.formatDoubleToTime(start) + ";" + timeFormatter.formatDoubleToTime(end) + ";" + timeFormatter.formatDoubleToString(pause) + ";" + assignment + ";" + notes);
             } catch (IOException e) {
                 logger.log(e.getMessage());
             }
@@ -199,6 +206,15 @@ public class WorkTimeRecordEntryController {
     private void mandatoryErrorPopup(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Mandatory field missing");
+        alert.setHeaderText("Error");
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    // Method calling when pause time is negative or pause time is longer then worked hours
+    private void pauseErrorPopup(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Pause time isn't correct!");
         alert.setHeaderText("Error");
         alert.setContentText(message);
         alert.showAndWait();

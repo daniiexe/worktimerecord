@@ -59,6 +59,18 @@ The main learning aspect is to learn how to use JavaFX and combine it with basic
   - format time from a double to mm:hh
   - format time from mm:hh to a double
 
+- 10.3.2026
+  - Pause checker
+    - when pause is negative an error pop up will be shown
+    - when pause is higher than worked hours an error pop up will be shown
+  - Pause formatting
+    - pause time will now be formatted into mm
+    - extra formatting methods in time formatter
+      - `formatStringToDouble(String time)` → will format the input value into a calculatable double
+      - `formatDoubleToString(double time)` → will format the calculatable double into a String formatted into mm
+  - Fixed a variable mistyping
+    - `Constants.java` -> `LOGGING_CSV_FILE` Constants referred to `csv/logs.log`, but should referred to `log/logs.log`
+
 ---
 
 ### Project ToDos
