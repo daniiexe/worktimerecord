@@ -69,8 +69,12 @@ The main learning aspect is to learn how to use JavaFX and combine it with basic
       - `formatStringToDouble(String time)` → will format the input value into a calculatable double
       - `formatDoubleToString(double time)` → will format the calculatable double into a String formatted into mm
   - Fixed a variable mistyping
-    - `Constants.java` -> `LOGGING_CSV_FILE` Constants referred to `csv/logs.log`, but should referred to `log/logs.log`
+    - `Constants.java` -> `LOGGING_CSV_FILE` Constants referred to `csv/logs.log`, but should refer to `log/logs.log`
 
+- 11.3.2026
+  - removed in `worktimerecord.fxml` and `worktimerecordentry.fxml` all styling
+    - added a `styles/style.css` in resources, to get all styling into a single CSS file
+    - moved all styling from before into this file
 ---
 
 ### Project ToDos

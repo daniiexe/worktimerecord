@@ -8,6 +8,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -16,12 +19,10 @@ import org.httle.steiner.worktimerecord.model.EntryModel;
 import org.httle.steiner.worktimerecord.util.Logger;
 import org.httle.steiner.worktimerecord.model.WorktimeModel;
 import org.httle.steiner.worktimerecord.util.TimeFormatter;
-
 import javax.swing.*;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Controller for the worktime record UI (landing ui)
@@ -96,6 +97,7 @@ public class WorkTimeRecordController {
         menuItemExport.setOnAction(e -> exportCSVFile());
         menuItemClear.setOnAction(e -> clearEntriesCSV());
         menuItemExit.setOnAction(e -> exitApplication());
+        menuItemExit.setAccelerator(new KeyCodeCombination(KeyCode.Q, KeyCombination.CONTROL_DOWN));
         lbHoursSummary.setText("Total working hours: " + timeFormatter.formatDoubleToTime(Constants.TOTAL_WORKINGHOURS) + "h");
         enterEntries();
     }

@@ -151,7 +151,6 @@ public class WorkTimeRecordEntryController {
                     end = timeFormatter.formatTimeToDouble(txtEnd.getText());
                 }
 
-                // TODO: ISSUE: When pause time is < -1, e.g. -0:30, than it's not negative - need to fix
                 if (txtPause.getText().isBlank()) {
                     mandatoryErrorPopup("Pause time must be entered!");
                     break;
@@ -188,10 +187,12 @@ public class WorkTimeRecordEntryController {
 
             // Writes the entered entry in the csv file
             try (PrintWriter writer = new PrintWriter(new FileWriter(Constants.ENTRIES_CSV_FILE.toFile(), true))) {
-                writer.println(mid + ";" + firstName + ";" + lastName + ";" + project + ";" + date + ";" + timeFormatter.formatDoubleToTime(start) + ";" + timeFormatter.formatDoubleToTime(end) + ";" + timeFormatter.formatDoubleToString(pause) + ";" + assignment + ";" + notes);
+                writer.println(mid + ";" + firstName + ";" + lastName + ";" + project + ";" + date + ";"
+                        + timeFormatter.formatDoubleToTime(start) + ";" + timeFormatter.formatDoubleToTime(end) + ";"
+                        + timeFormatter.formatDoubleToString(pause) + ";" + assignment + ";" + notes);
             } catch (IOException e) {
                 logger.log(e.getMessage());
-            }
+            }2d
 
             // Refreshes the complete tableview, clears all inputs and closes the window
             workTimeRecordController.refreshEntries();

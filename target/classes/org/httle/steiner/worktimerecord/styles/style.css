@@ -1,0 +1,46 @@
+/* worktimerecord.fxml */
+
+/* MenuBar */
+
+
+/* GUI Header */
+.lb-header {
+    -fx-border-color: #bdc3c7;
+    -fx-border-radius: 8;
+    -fx-background-color: #f8f9fa;
+}
+
+/* GUI Content */
+#btnEntry {
+    -fx-background-color: #27ae60;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+}
+
+/* Table View */
+#workTimeTable {
+    -fx-background-color: transparent;
+    -fx-border-color: #dcdde1;
+    -fx-border-radius: 4
+}
+
+
+/* worktimerecordentry.fxml */
+#btnSave {
+    -fx-background-color: green;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+#btnCancel {
+    -fx-background-color: red;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+#btnClear {
+    -fx-background-color: orange;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}

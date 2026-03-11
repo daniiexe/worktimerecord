@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="TOP_CENTER" prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.httle.steiner.worktimerecord.controllers.WorkTimeRecordController">
+<VBox alignment="TOP_CENTER" prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.httle.steiner.worktimerecord.controllers.WorkTimeRecordController" stylesheets="@styles/style.css">
     <children>
         <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
             <menus>
@@ -28,15 +28,15 @@
             <children>
                 <HBox alignment="CENTER" prefHeight="90.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
                     <children>
-                        <Label fx:id="lbHoursSummary" alignment="CENTER" prefHeight="60.0" prefWidth="400.0" style="-fx-border-color: #bdc3c7; -fx-border-radius: 8; -fx-background-color: #f8f9fa;" text="NULL">
+                        <Label fx:id="lbHoursSummary" alignment="CENTER" prefHeight="60.0" prefWidth="400.0" text="NULL" styleClass="lb-header">
                             <font><Font name="System Bold" size="14.0" /></font>
                             <HBox.margin><Insets left="15.0" right="15.0" /></HBox.margin>
                         </Label>
-                        <Label fx:id="lbHoursWorked" alignment="CENTER" prefHeight="60.0" prefWidth="400.0" style="-fx-border-color: #bdc3c7; -fx-border-radius: 8; -fx-background-color: #f8f9fa;" text="NULL">
+                        <Label fx:id="lbHoursWorked" alignment="CENTER" prefHeight="60.0" prefWidth="400.0" text="NULL" styleClass="lb-header">
                             <font><Font name="System Bold" size="14.0" /></font>
                             <HBox.margin><Insets left="15.0" right="15.0" /></HBox.margin>
                         </Label>
-                        <Label fx:id="lbHoursRest" alignment="CENTER" prefHeight="60.0" prefWidth="400.0" style="-fx-border-color: #bdc3c7; -fx-border-radius: 8; -fx-background-color: #f8f9fa;" text="NULL">
+                        <Label fx:id="lbHoursRest" alignment="CENTER" prefHeight="60.0" prefWidth="400.0" text="NULL" styleClass="lb-header">
                             <font><Font name="System Bold" size="14.0" /></font>
                             <HBox.margin><Insets left="15.0" right="15.0" /></HBox.margin>
                         </Label>
@@ -45,7 +45,7 @@
 
                 <VBox spacing="10.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="155.0" AnchorPane.rightAnchor="155.0" AnchorPane.topAnchor="110.0">
                     <children>
-                        <Button fx:id="btnEntry" defaultButton="true" maxWidth="Infinity" minHeight="50.0" mnemonicParsing="false" prefHeight="50.0" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;" text="Enter working hours" VBox.vgrow="NEVER">
+                        <Button fx:id="btnEntry" defaultButton="true" maxWidth="Infinity" minHeight="50.0" mnemonicParsing="false" prefHeight="50.0" text="Enter working hours" VBox.vgrow="NEVER">
                             <font><Font size="14.0" /></font>
                             <cursor>
                                 <Cursor fx:constant="HAND" />
@@ -56,7 +56,7 @@
                             <font><Font name="System Bold" size="13.0" /></font>
                         </Label>
 
-                        <TableView fx:id="workTimeTable" prefHeight="900" prefWidth="800.0" style="-fx-background-color: transparent; -fx-border-color: #dcdde1;" VBox.vgrow="ALWAYS">
+                        <TableView fx:id="workTimeTable" prefHeight="900" prefWidth="800.0" VBox.vgrow="ALWAYS">
                             <columns>
                                 <TableColumn fx:id="colMID" prefWidth="50.0" text="MID" />
                                 <TableColumn fx:id="colLastname" prefWidth="150.0" text="Lastname" />
