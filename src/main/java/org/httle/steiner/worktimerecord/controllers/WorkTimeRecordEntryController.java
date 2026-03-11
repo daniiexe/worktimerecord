@@ -151,6 +151,12 @@ public class WorkTimeRecordEntryController {
                     end = timeFormatter.formatTimeToDouble(txtEnd.getText());
                 }
 
+                // =============================
+                // TIME INPUT CORRECTION
+                // =============================
+                // TODO: Check if time format is correct (hh:mm) (mm) -> if not then error popup window like in mandatory field
+                // TODO: (OPTIONAL) An information system in menubar explaining how the entry system is working and how it should be used correctly
+
                 if (txtPause.getText().isBlank()) {
                     mandatoryErrorPopup("Pause time must be entered!");
                     break;
@@ -163,6 +169,7 @@ public class WorkTimeRecordEntryController {
                 } else {
                     pause = timeFormatter.formatStringToDouble(txtPause.getText());
                 }
+                // =============================
 
                 if (txtAssignment.getText().isBlank()) {
                     mandatoryErrorPopup("Assignment must be entered!");
