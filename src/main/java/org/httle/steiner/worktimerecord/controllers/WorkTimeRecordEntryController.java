@@ -1,5 +1,6 @@
 package org.httle.steiner.worktimerecord.controllers;
 
+import javafx.css.Match;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -9,6 +10,8 @@ import org.httle.steiner.worktimerecord.model.WorktimeModel;
 import org.httle.steiner.worktimerecord.util.TimeFormatter;
 
 import java.io.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Controller for the worktime entry UI and saving the values into csv files
@@ -39,6 +42,9 @@ public class WorkTimeRecordEntryController {
     private final Logger logger = Logger.getInstance();
     private final TimeFormatter timeFormatter = TimeFormatter.getInstance();
     private WorktimeModel worktimeModel;
+
+    private static final Pattern HOURS_MINUTE_PATTERN = Pattern.compile("^([01]\\d|2[0-3]):[0-5]\\d$");
+    private static final Pattern MINUTE_PATTERN = Pattern.compile("^[0-5]\\d$");
 
     public void setWorktimeModel(WorktimeModel worktimeModel) {this.worktimeModel = worktimeModel;}
     private WorkTimeRecordController workTimeRecordController;
@@ -137,8 +143,16 @@ public class WorkTimeRecordEntryController {
                     date = txtDate.getValue().toString();
                 }
 
+                // =============================
+                // TIME INPUT CORRECTION
+                // =============================
+                // TODO: (OPTIONAL) An information system in menubar explaining how the entry system is working and how it should be used correctly
+
                 if (txtStart.getText().isBlank()) {
                     mandatoryErrorPopup("Start time must be entered!");
+                    break;
+                } else if (!isValidHoursMinute(txtStart.getText())) {
+                    timeFormationError("Wrong formation in start time. Formation required: hh:mm");
                     break;
                 } else {
                     start = timeFormatter.formatTimeToDouble(txtStart.getText());
@@ -147,18 +161,18 @@ public class WorkTimeRecordEntryController {
                 if (txtEnd.getText().isBlank()) {
                     mandatoryErrorPopup("End time must be entered!");
                     break;
+                } else if (!isValidHoursMinute(txtEnd.getText())) {
+                    timeFormationError("Wrong formation in end time. Formation required: hh:mm");
+                    break;
                 } else {
                     end = timeFormatter.formatTimeToDouble(txtEnd.getText());
                 }
 
-                // =============================
-                // TIME INPUT CORRECTION
-                // =============================
-                // TODO: Check if time format is correct (hh:mm) (mm) -> if not then error popup window like in mandatory field
-                // TODO: (OPTIONAL) An information system in menubar explaining how the entry system is working and how it should be used correctly
-
                 if (txtPause.getText().isBlank()) {
                     mandatoryErrorPopup("Pause time must be entered!");
+                    break;
+                } else if (!isValidMinute(txtPause.getText())) {
+                    timeFormationError("Wrong formation in pause time. Formation required: mm");
                     break;
                 } else if (timeFormatter.formatTimeToDouble(txtPause.getText()) < 0.0){
                     pauseErrorPopup("Pause time is negative!");
@@ -183,7 +197,6 @@ public class WorkTimeRecordEntryController {
                 } else {
                     notes = txtNotes.getText();
                 }
-
                 success = true;
             }
 
@@ -199,7 +212,7 @@ public class WorkTimeRecordEntryController {
                         + timeFormatter.formatDoubleToString(pause) + ";" + assignment + ";" + notes);
             } catch (IOException e) {
                 logger.log(e.getMessage());
-            }2d
+            }
 
             // Refreshes the complete tableview, clears all inputs and closes the window
             workTimeRecordController.refreshEntries();
@@ -226,5 +239,26 @@ public class WorkTimeRecordEntryController {
         alert.setHeaderText("Error");
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    // Method calling when a wrong time formation is entered
+    private void timeFormationError(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Wrong time formation");
+        alert.setHeaderText("Error");
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    // Returns if the hours minute formation from the input is correct
+    private boolean isValidHoursMinute(String time) {
+        Matcher matcher = HOURS_MINUTE_PATTERN.matcher(time);
+        return matcher.matches();
+    }
+
+    // Returns if the minute formation from the input is correct
+    private boolean isValidMinute(String time) {
+        Matcher matcher = MINUTE_PATTERN.matcher(time);
+        return matcher.matches();
     }
 }

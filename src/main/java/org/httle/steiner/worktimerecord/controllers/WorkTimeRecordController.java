@@ -53,6 +53,7 @@ public class WorkTimeRecordController {
 
     @FXML private MenuItem menuItemExport;
     @FXML private MenuItem menuItemClear;
+    @FXML private MenuItem menuItemRefresh;
     @FXML private MenuItem menuItemExit;
 
     private WorktimeModel worktimeModel;
@@ -96,6 +97,7 @@ public class WorkTimeRecordController {
         btnEntry.setOnAction(e -> openInputWindow());
         menuItemExport.setOnAction(e -> exportCSVFile());
         menuItemClear.setOnAction(e -> clearEntriesCSV());
+        menuItemRefresh.setOnAction(e -> refreshEntries());
         menuItemExit.setOnAction(e -> exitApplication());
         menuItemExit.setAccelerator(new KeyCodeCombination(KeyCode.Q, KeyCombination.CONTROL_DOWN));
         lbHoursSummary.setText("Total working hours: " + timeFormatter.formatDoubleToTime(Constants.TOTAL_WORKINGHOURS) + "h");

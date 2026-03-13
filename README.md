@@ -75,6 +75,13 @@ The main learning aspect is to learn how to use JavaFX and combine it with basic
   - removed in `worktimerecord.fxml` and `worktimerecordentry.fxml` all styling
     - added a `styles/style.css` in resources, to get all styling into a single CSS file
     - moved all styling from before into this file
+
+- 12.3.2026
+  - fixed issue:
+    - Need to check if time format is correct in entry format with hh:mm and mm for pause time with an error popup window like in the mandantory textfield
+
+- 13.3.2026
+  - styled table view with css
 ---
 
 ### Project ToDos

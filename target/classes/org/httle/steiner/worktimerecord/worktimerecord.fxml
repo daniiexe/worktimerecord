@@ -14,14 +14,12 @@
                     <items>
                         <MenuItem fx:id="menuItemExport" text="Export" />
                         <MenuItem fx:id="menuItemClear" text="Clear entries" />
+                        <MenuItem fx:id="menuItemRefresh" text="Refresh entries" />
                         <SeparatorMenuItem />
                         <MenuItem fx:id="menuItemExit" text="Exit" />
                     </items>
                 </Menu>
             </menus>
-         <cursor>
-            <Cursor fx:constant="DEFAULT" />
-         </cursor>
         </MenuBar>
         
         <AnchorPane VBox.vgrow="ALWAYS">
@@ -58,16 +56,16 @@
 
                         <TableView fx:id="workTimeTable" prefHeight="900" prefWidth="800.0" VBox.vgrow="ALWAYS">
                             <columns>
-                                <TableColumn fx:id="colMID" prefWidth="50.0" text="MID" />
-                                <TableColumn fx:id="colLastname" prefWidth="150.0" text="Lastname" />
-                                <TableColumn fx:id="colFirstname" prefWidth="150.0" text="Firstname" />
-                                <TableColumn fx:id="colProject" prefWidth="150.0" text="Project" />
-                                <TableColumn fx:id="colDate" prefWidth="150.0" text="Date" />
-                                <TableColumn fx:id="colStart" prefWidth="150.0" text="Start" />
-                                <TableColumn fx:id="colEnd" prefWidth="150.0" text="End" />
-                                <TableColumn fx:id="colPause" prefWidth="150.0" text="Pause" />
-                                <TableColumn fx:id="colAssignment" prefWidth="200.0" text="Assignment" />
-                                <TableColumn fx:id="colNotes" prefWidth="200.0" text="Notes" />
+                                <TableColumn fx:id="colMID" prefWidth="50.0" text="MID" styleClass="tv-col"/>
+                                <TableColumn fx:id="colLastname" prefWidth="150.0" text="Lastname" styleClass="tv-col"/>
+                                <TableColumn fx:id="colFirstname" prefWidth="150.0" text="Firstname" styleClass="tv-col"/>
+                                <TableColumn fx:id="colProject" prefWidth="150.0" text="Project" styleClass="tv-col"/>
+                                <TableColumn fx:id="colDate" prefWidth="150.0" text="Date" styleClass="tv-col"/>
+                                <TableColumn fx:id="colStart" prefWidth="150.0" text="Start" styleClass="tv-col"/>
+                                <TableColumn fx:id="colEnd" prefWidth="150.0" text="End" styleClass="tv-col"/>
+                                <TableColumn fx:id="colPause" prefWidth="150.0" text="Pause" styleClass="tv-col"/>
+                                <TableColumn fx:id="colAssignment" prefWidth="200.0" text="Assignment" styleClass="tv-col"/>
+                                <TableColumn fx:id="colNotes" prefWidth="200.0" text="Notes" styleClass="tv-col"/>
                             </columns>
                         </TableView>
                     </children>
