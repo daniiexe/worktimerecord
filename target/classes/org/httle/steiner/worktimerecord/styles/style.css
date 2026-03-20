@@ -1,17 +1,16 @@
 .lb-header {
-    -fx-border-color: #8e8e93;
-    -fx-border-radius: 8px;
+    -fx-border-radius: 20;
     -fx-background-color: white;
+    -fx-background-radius: 20;
     -fx-padding: 10px;
 }
 
 #btnEntry {
-    -fx-background-color: #28a745;
+    -fx-background-color: #2A573D;
     -fx-text-fill: white;
     -fx-font-weight: bold;
-    -fx-background-radius: 8px;
-    -fx-border-radius: 8px;
-    -fx-border-color: #8e8e93;
+    -fx-background-radius: 30;
+    -fx-border-radius: 30;
 }
 
 #btnSave {
@@ -95,7 +94,8 @@
 }
 
 .table-row-cell:hover {
-    -fx-background-color: #e5f1ff;
+    -fx-background-color: rgb(42, 87, 61, 0.4);
+    -fx-cursor: hand;
 }
 
 .table-row-cell:selected {
