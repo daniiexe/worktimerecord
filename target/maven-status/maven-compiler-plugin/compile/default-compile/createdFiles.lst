@@ -1,9 +1,10 @@
 org\httle\steiner\worktimerecord\util\TimeFormatter.class
-module-info.class
 org\httle\steiner\worktimerecord\controllers\WorkTimeRecordController.class
 org\httle\steiner\worktimerecord\constants\Constants.class
 org\httle\steiner\worktimerecord\model\EntryModel.class
+org\httle\steiner\worktimerecord\Launcher.class
+org\httle\steiner\worktimerecord\model\WorktimeModel.class
+module-info.class
 org\httle\steiner\worktimerecord\controllers\WorkTimeRecordEntryController.class
 org\httle\steiner\worktimerecord\util\Logger.class
 org\httle\steiner\worktimerecord\WorkTimeRecord.class
-org\httle\steiner\worktimerecord\model\WorktimeModel.class
