@@ -3,12 +3,14 @@ package org.httle.steiner.worktimerecord;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.httle.steiner.worktimerecord.controllers.WorkTimeRecordController;
 import org.httle.steiner.worktimerecord.model.WorktimeModel;
 import org.httle.steiner.worktimerecord.util.Logger;
 
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * Worktime record main UI class
@@ -37,6 +39,7 @@ public class WorkTimeRecord extends Application {
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.setTitle("WorkTimeRecord");
+        stage.getIcons().add(new Image(Objects.requireNonNull(WorkTimeRecord.class.getResourceAsStream("img/logo.png"))));
         stage.show();
 
         // Logging the start of the application

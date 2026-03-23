@@ -8,7 +8,7 @@
 
 <VBox prefWidth="400.0" spacing="15.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.httle.steiner.worktimerecord.controllers.WorkTimeRecordEntryController" stylesheets="@../styles/style.css">
     <children>
-        <Label text="Record working hours">
+        <Label text="Record working hours" styleClass="lb-entry-controller">
             <font><Font name="System Bold" size="18.0" /></font>
         </Label>
 
@@ -18,38 +18,38 @@
                 <ColumnConstraints hgrow="ALWAYS" />
             </columnConstraints>
             <children>
-                <Label text="Employee ID: *" GridPane.rowIndex="0" />
-                <TextField fx:id="txtMID" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <Label text="Employee ID: *" GridPane.rowIndex="0" styleClass="lb-entry-controller"/>
+                <TextField fx:id="txtMID" GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="txt-inputs"/>
 
-                <Label text="Lastname: *" GridPane.rowIndex="1" />
-                <TextField fx:id="txtLastname" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label text="Lastname: *" GridPane.rowIndex="1" styleClass="lb-entry-controller"/>
+                <TextField fx:id="txtLastname" GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="txt-inputs"/>
 
-                <Label text="Firstname: *" GridPane.rowIndex="2" />
-                <TextField fx:id="txtFirstname"  GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Label text="Firstname: *" GridPane.rowIndex="2" styleClass="lb-entry-controller"/>
+                <TextField fx:id="txtFirstname"  GridPane.columnIndex="1" GridPane.rowIndex="2" styleClass="txt-inputs"/>
 
-                <Label text="Project: *" GridPane.rowIndex="3" />
-                <TextField fx:id="txtProject" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Label text="Project: *" GridPane.rowIndex="3" styleClass="lb-entry-controller"/>
+                <TextField fx:id="txtProject" GridPane.columnIndex="1" GridPane.rowIndex="3" styleClass="txt-inputs"/>
 
-                <Label text="Date: *" GridPane.rowIndex="4" />
-                <DatePicker fx:id="txtDate" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                <Label text="Date: *" GridPane.rowIndex="4" styleClass="lb-entry-controller"/>
+                <DatePicker fx:id="txtDate" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="4" styleClass="txt-inputs-special">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></DatePicker>
 
-                <Label text="Start-Time: *" GridPane.rowIndex="5" />
-                <TextField fx:id="txtStart" promptText="hh:mm" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <Label text="Start-Time: *" GridPane.rowIndex="5" styleClass="lb-entry-controller"/>
+                <TextField fx:id="txtStart" promptText="hh:mm" GridPane.columnIndex="1" GridPane.rowIndex="5" styleClass="txt-inputs"/>
 
-                <Label text="End-Time: *" GridPane.rowIndex="6" />
-                <TextField fx:id="txtEnd" promptText="hh:mm" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                <Label text="End-Time: *" GridPane.rowIndex="6" styleClass="lb-entry-controller"/>
+                <TextField fx:id="txtEnd" promptText="hh:mm" GridPane.columnIndex="1" GridPane.rowIndex="6" styleClass="txt-inputs"/>
 
-                <Label text="Pause-Time: *" GridPane.rowIndex="7" />
-                <TextField fx:id="txtPause" promptText="mm" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                <Label text="Pause-Time: *" GridPane.rowIndex="7" styleClass="lb-entry-controller"/>
+                <TextField fx:id="txtPause" promptText="mm" GridPane.columnIndex="1" GridPane.rowIndex="7" styleClass="txt-inputs"/>
 
-                <Label text="Assignment: *" GridPane.rowIndex="8" />
-                <TextArea fx:id="txtAssignment" prefHeight="60.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                <Label text="Assignment: *" GridPane.rowIndex="8" styleClass="lb-entry-controller"/>
+                <TextArea fx:id="txtAssignment" prefHeight="60.0" GridPane.columnIndex="1" GridPane.rowIndex="8" styleClass="txt-inputs-special"/>
 
-                <Label text="Notes:" GridPane.rowIndex="9" />
-                <TextArea fx:id="txtNotes" prefHeight="60.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                <Label text="Notes:" GridPane.rowIndex="9" styleClass="lb-entry-controller"/>
+                <TextArea fx:id="txtNotes" prefHeight="60.0" GridPane.columnIndex="1" GridPane.rowIndex="9" styleClass="txt-inputs-special"/>
             </children>
          <rowConstraints>
             <RowConstraints />

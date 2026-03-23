@@ -8,12 +8,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.httle.steiner.worktimerecord.WorkTimeRecord;
 import org.httle.steiner.worktimerecord.constants.Constants;
 import org.httle.steiner.worktimerecord.model.EntryModel;
 import org.httle.steiner.worktimerecord.util.Logger;
@@ -23,6 +25,7 @@ import javax.swing.*;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.Objects;
 
 /**
  * Controller for the worktime record UI (landing ui)
@@ -119,6 +122,7 @@ public class WorkTimeRecordController {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initOwner(btnEntry.getScene().getWindow());
             stage.setScene(scene);
+            stage.getIcons().add(new Image(Objects.requireNonNull(WorkTimeRecord.class.getResourceAsStream("img/logo_entry.png"))));
             stage.show();
         } catch (IOException e) {
             logger.log(e.getMessage());
