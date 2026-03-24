@@ -69,7 +69,7 @@ public class WorkTimeRecordController {
 
         // %.2fh due to -> % begin of placeholder, .2 -> decimal places, f -> double/float, h -> just to show the unit
         lbHoursWorked.textProperty().bind(Bindings.createStringBinding(() ->
-                String.format("Workhours: " + timeFormatter.formatDoubleToTime(worktimeModel.getWorkedHours()) + "h"),
+                String.format(timeFormatter.formatDoubleToTime(worktimeModel.getWorkedHours()) + "h \nWorkhours"),
                 worktimeModel.workedHoursProperty())
         );
 
@@ -77,10 +77,12 @@ public class WorkTimeRecordController {
         lbHoursRest.textProperty().bind(Bindings.createStringBinding(() -> {
                     double rest = Constants.TOTAL_WORKINGHOURS - worktimeModel.getWorkedHours();
 
-                    if (rest < 0) {return String.format("Overtime: " + timeFormatter.formatDoubleToTime(Math.abs(rest)) + "h");}
-                    else {return String.format("Remaining: " + timeFormatter.formatDoubleToTime(rest) + "h");}
+                    if (rest < 0) {return String.format(timeFormatter.formatDoubleToTime(Math.abs(rest)) + "h \nOvertime");}
+                    else {return String.format(timeFormatter.formatDoubleToTime(rest) + "h \nRemaining");}
                 }, worktimeModel.workedHoursProperty())
         );
+
+        lbHoursSummary.setText(timeFormatter.formatDoubleToTime(Constants.TOTAL_WORKINGHOURS) + "h \nTotal working hours");
     }
 
     // Initializing all FXML components
@@ -103,7 +105,6 @@ public class WorkTimeRecordController {
         menuItemRefresh.setOnAction(e -> refreshEntries());
         menuItemExit.setOnAction(e -> exitApplication());
         menuItemExit.setAccelerator(new KeyCodeCombination(KeyCode.Q, KeyCombination.CONTROL_DOWN));
-        lbHoursSummary.setText("Total working hours: " + timeFormatter.formatDoubleToTime(Constants.TOTAL_WORKINGHOURS) + "h");
         enterEntries();
     }
 

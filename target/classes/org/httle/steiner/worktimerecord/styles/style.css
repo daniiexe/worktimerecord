@@ -8,7 +8,7 @@
 
 #menuFile .label {
     -fx-text-fill: white;
-    -fx-font-size: 16px;
+    -fx-font-weight: bold;
 }
 
 #menuFile .label:hover {
@@ -18,6 +18,7 @@
 
 #menuFile .menu-item {
     -fx-background-color: #212631;
+    -fx-font-weight: normal;
 }
 
 #menuFile .menu-item:hover {
