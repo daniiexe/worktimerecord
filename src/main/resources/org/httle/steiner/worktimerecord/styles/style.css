@@ -42,8 +42,8 @@
     -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-font-size: 18px;
-    -fx-background-radius: 15;
-    -fx-border-radius: 15;
+    -fx-background-radius: 13;
+    -fx-border-radius: 13;
 }
 
 #btnSave {
@@ -82,7 +82,7 @@
 
 #tvPlaceholder {
     -fx-text-fill: white;
-    -fx-font-size: 32px;
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
 }
 
@@ -138,12 +138,12 @@
 }
 
 .table-row-cell:hover {
-    -fx-background-color: rgb(33, 38, 49, 0.7);
+    -fx-background-color: rgb(66, 74, 89, 0.59);
     -fx-cursor: hand;
 }
 
 .table-row-cell:selected {
-    -fx-background-color: #3789D2;
+    -fx-background-color: rgb(55, 137, 210, 0.4);
     -fx-effect: dropshadow(three-pass-box, rgba(0, 81, 255, 0.3), 10, 0, 0, 0);
 }
 
