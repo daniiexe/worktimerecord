@@ -12,5 +12,4 @@ module org.httle.steiner.worktimerecord {
     exports org.httle.steiner.worktimerecord.model;
     exports org.httle.steiner.worktimerecord.util;
     opens org.httle.steiner.worktimerecord.util to javafx.fxml;
-
 }

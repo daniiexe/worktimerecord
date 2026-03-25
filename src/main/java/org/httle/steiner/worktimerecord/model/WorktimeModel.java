@@ -53,7 +53,7 @@ public class WorktimeModel {
 
     // Clear all worked hours in the variable and the workedhours.csv file
     public void clearHours() {
-        workedHours.set(0);
+        workedHours.set(0.0);
         try (PrintWriter writer = new PrintWriter(new FileWriter(Constants.WORKED_HOURS_CSV_FILE.toFile()))) {
             writer.println(0.0);
         } catch (IOException e) {

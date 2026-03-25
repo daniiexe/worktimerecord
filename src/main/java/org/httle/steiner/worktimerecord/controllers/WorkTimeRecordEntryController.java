@@ -193,7 +193,7 @@ public class WorkTimeRecordEntryController {
                 }
 
                 if (txtNotes.getText().isBlank()) {
-                    notes = " ";
+                    notes = "-";
                 } else {
                     notes = txtNotes.getText();
                 }

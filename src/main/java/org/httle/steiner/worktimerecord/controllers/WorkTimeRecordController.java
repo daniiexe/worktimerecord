@@ -156,11 +156,6 @@ public class WorkTimeRecordController {
         }
     }
 
-    public void refreshEntries() {
-        workTimeTable.getItems().clear();
-        enterEntries();
-    }
-
     // Exports the entries.csv file on the local datastore of the user
     private void exportCSVFile() {
         Stage stage = (Stage) btnEntry.getScene().getWindow();
@@ -207,6 +202,11 @@ public class WorkTimeRecordController {
         } catch (IOException e) {
             logger.log(e.getMessage());
         }
+    }
+
+    public void refreshEntries() {
+        workTimeTable.getItems().clear();
+        enterEntries();
     }
 
     // Exits the application with a MenuItem
