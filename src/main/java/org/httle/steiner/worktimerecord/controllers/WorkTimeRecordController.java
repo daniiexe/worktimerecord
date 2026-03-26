@@ -67,13 +67,11 @@ public class WorkTimeRecordController {
     public void setWorktimeModel(WorktimeModel worktimeModel) {
         this.worktimeModel = worktimeModel;
 
-        // %.2fh due to -> % begin of placeholder, .2 -> decimal places, f -> double/float, h -> just to show the unit
         lbHoursWorked.textProperty().bind(Bindings.createStringBinding(() ->
                 String.format(timeFormatter.formatDoubleToTime(worktimeModel.getWorkedHours()) + "h \nWorkhours"),
                 worktimeModel.workedHoursProperty())
         );
 
-        // Formatting the double in a String datatype in order to achieve the hh:mm format on the labels
         lbHoursRest.textProperty().bind(Bindings.createStringBinding(() -> {
                     double rest = Constants.TOTAL_WORKINGHOURS - worktimeModel.getWorkedHours();
 
